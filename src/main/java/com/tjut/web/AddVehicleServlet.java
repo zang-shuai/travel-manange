@@ -1,6 +1,6 @@
 package com.tjut.web;
 
-import com.tjut.dao.VehicleService;
+import com.tjut.service.VehicleService;
 import com.tjut.entity.Tourist;
 import com.tjut.entity.TouristImg;
 import com.tjut.entity.Vehicle;

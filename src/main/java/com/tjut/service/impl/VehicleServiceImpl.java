@@ -1,7 +1,7 @@
 package com.tjut.service.impl;
 
 import com.tjut.dao.VehicleDao;
-import com.tjut.dao.VehicleService;
+import com.tjut.service.VehicleService;
 import com.tjut.dao.impl.VehicleDaoImpl;
 import com.tjut.entity.Vehicle;
 

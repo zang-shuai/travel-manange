@@ -1,7 +1,7 @@
 package com.tjut.dao.impl;
 
 import com.tjut.dao.VehicleDao;
-import com.tjut.dao.VehicleService;
+import com.tjut.service.VehicleService;
 import com.tjut.entity.Vehicle;
 import com.tjut.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

@@ -1,7 +1,7 @@
 package com.tjut.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tjut.dao.VehicleService;
+import com.tjut.service.VehicleService;
 import com.tjut.entity.User;
 import com.tjut.entity.Vehicle;
 import com.tjut.service.UserService;
@@ -21,7 +21,7 @@ public class FindAllVehicleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        VehicleService vehicleService=new VehicleServiceImpl();
+        VehicleService vehicleService=  new VehicleServiceImpl();
         List<Vehicle> all = vehicleService.findAll();
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(all);

@@ -1,6 +1,6 @@
 package com.tjut.dao.impl;
 
-import com.tjut.dao.OrdersService;
+import com.tjut.dao.OrdersDao;
 import com.tjut.entity.Orders;
 import com.tjut.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
-public class OrdersDaoImpl implements OrdersService {
+public class OrdersDaoImpl implements OrdersDao {
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
