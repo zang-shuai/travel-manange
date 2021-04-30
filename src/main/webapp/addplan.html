@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="guiderform" method="post">
+    选择景点：<input name="gname" type="text"><br>
+    开始日期：<input name="pstartdate" type="date"><br>
+    结束日期：<input name="penddate" type="date"><br>
+    价格：<input name="pprice" type="number"><br>
+    最大游客数：<input name="pmaxcount" type="number"><br>
+
+
+    分派的导游：
+
+    <input type="submit">
+</form>
+
+<script>
+    const pathname = window.document.location.pathname;
+    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+    document.getElementById("guiderform").setAttribute("action", pa + "/addGuiderServlet");
+</script>
+</body>
+</html>

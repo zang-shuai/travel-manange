@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="userform" enctype="multipart/form-data" method="post">
+    姓名：<input name="uname" type="text"><br>
+    年龄：<input name="uage" type="number"><br>
+    电话：<input name="utelephonenumber" type="text"><br>
+    密码：<input name="upassword" type="password"><br>
+    头像：<input name="uhead" type="file"><br>
+    <input name="upower" type="hidden" value="1">
+    <input type="submit">
+</form>
+
+<script>
+    const pathname = window.document.location.pathname;
+    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+    document.getElementById("userform").setAttribute("action",pa+"/userRegisterServlet");
+</script>
+</body>
+</html>

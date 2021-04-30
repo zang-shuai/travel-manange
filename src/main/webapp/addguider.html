@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="guiderform" enctype="multipart/form-data" method="post">
+    姓名：<input name="gname" type="text"><br>
+    年龄：<input name="gage" type="number"><br>
+    电话：<input name="gtelephonenumber" type="text"><br>
+    密码：<input name="gpassword" type="password"><br>
+    头像：<input name="ghead" type="file"><br>
+    自我介绍： <textarea name="gintroduce" rows="10" cols="30"></textarea>
+    <input type="submit">
+</form>
+
+<script>
+    const pathname = window.document.location.pathname;
+    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+    document.getElementById("guiderform").setAttribute("action", pa + "/addGuiderServlet");
+</script>
+</body>
+</html>

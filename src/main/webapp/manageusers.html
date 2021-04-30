@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="usertable" border="2px black solid">
+    <tr>
+        <td>序号</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>电话号码</td>
+    </tr>
+</table>
+<div id="div1"></div>
+
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "findAllUserServlet", true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            //获取服务器的响应结果
+            let responseText = xmlhttp.responseText;
+            let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+
+            for (let obj in arr) {
+                let look = []
+                let tr = document.createElement("tr")
+                let arrElement = arr[obj];
+                look.push(arrElement["uid"])
+                look.push(arrElement["uname"])
+                look.push(arrElement["uage"])
+                look.push(arrElement["utelephonenumber"])
+                for (let x in look) {
+                    let td = document.createElement("td")
+                    td.innerHTML = look[x]
+                    tr.appendChild(td)
+                }
+                document.getElementById("usertable").appendChild(tr);
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

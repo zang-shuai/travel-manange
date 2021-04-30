@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    </style>
+</head>
+<body>
+<a href="addtourist.html">添加旅游景点</a>
+
+<div id="tourist" style="border: black 2px solid">
+
+</div>
+
+<script>
+
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "findAllTouristServlet", true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            //获取服务器的响应结果
+            let responseText = xmlhttp.responseText;
+            let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+            console.log(arr)
+            for (let obj in arr) {
+                let look = []
+                let tr = document.createElement("div")
+                let arrElement = arr[obj];
+                look.push(arrElement["tid"])
+                look.push(arrElement["tname"])
+                look.push(arrElement["tintroduce"])
+                look.push(arrElement["tprice"])
+                let imgs = arrElement["touristImg"];
+
+                let addr = imgs[0]["taddress"];
+
+                let s = "<img src=" + addr + " width=\"40%\" height=\"40%\">"
+                look.push(s)
+
+                for (let x in look) {
+                    let td = document.createElement("div")
+                    td.innerHTML = look[x]
+                    tr.appendChild(td)
+                }
+                document.getElementById("tourist").appendChild(tr);
+            }
+        }
+    }
+</script>
+</body>
+</html>
