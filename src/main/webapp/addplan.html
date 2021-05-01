@@ -6,14 +6,31 @@
 </head>
 <body>
 <form id="guiderform" method="post">
-    选择景点：<input name="gname" type="text"><br>
-    开始日期：<input name="pstartdate" type="date"><br>
-    结束日期：<input name="penddate" type="date"><br>
-    价格：<input name="pprice" type="number"><br>
-    最大游客数：<input name="pmaxcount" type="number"><br>
+    <label>
+        选择景点：
+        <input name="gname" type="text">
+    </label><br>
+    <label>
+        开始日期：
+        <input name="pstartdate" type="date">
+    </label><br>
+    <label>
+        结束日期：
+        <input name="penddate" type="date">
+    </label><br>
+    <label>
+        价格：
+        <input name="pprice" type="number">
+    </label><br>
+    <label>
+        最大游客数：
+        <input name="pmaxcount" type="number">
+    </label><br>
 
 
-    分派的导游：
+    点击查看导游：
+    <button type="button" onclick="refresh()">刷新</button>
+
 
     <input type="submit">
 </form>
@@ -22,6 +39,25 @@
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
     document.getElementById("guiderform").setAttribute("action", pa + "/addGuiderServlet");
+
+
+
+    function refresh(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "findFreeGuiderServlet", true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+
+            }
+        }
+
+    }
+
+
+
+
+
 </script>
 </body>
 </html>
