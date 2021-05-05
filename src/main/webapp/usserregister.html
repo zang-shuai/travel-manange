@@ -5,16 +5,64 @@
     <title>Title</title>
 </head>
 <body>
+<link rel="stylesheet" href="styles/userregister.css">
+<div class="lg_layout">
+    <div class="lg_left">
+        <p>新用户注册</p>
+        <p>USER REGISTER</p>
+    </div>
 
-<form id="userform" enctype="multipart/form-data" method="post">
-    姓名：<input name="uname" type="text"><br>
-    年龄：<input name="uage" type="number"><br>
-    电话：<input name="utelephonenumber" type="text"><br>
-    密码：<input name="upassword" type="password"><br>
-    头像：<input name="uhead" type="file"><br>
-    <input name="upower" type="hidden" value="1">
-    <input type="submit">
-</form>
+    <div class="lg_center">
+
+
+
+        <div class="lg_form">
+            <form id="userform" enctype="multipart/form-data" method="post" >
+                <table>
+                    <tr>
+                        <td class="td_left"><label for="username">姓名</label></td>
+                        <td class="td_right"><input type="text" name="uname" id="username" placeholder="请输入姓名" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left"><label for="password">密码</label></td>
+                        <td class="td_right"><input type="password" name="upassword" id="password" pattern="[\w]{6,12}" placeholder="请输入6到12位单词密码">
+                        <td id="s_password" class="error"></td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left"><label for="birthday">年龄</label></td>
+                        <td class="td_right"><input type="number" name="nage" id="birthday" placeholder="请输入年龄"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left"><label for="tel">电话</label></td>
+                        <td class="td_right"><input type="text" name="utelephonenumber" id="tel" placeholder="请输入电话"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_left"><label>头像</label></td>
+                        <td class="td_right">
+                            <input name="uhead" type="file"><br>
+                            <input name="upower" type="hidden" value="1">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" id="sub" value="注册"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div class="lg_right">
+        <p>已有账号?</p>
+        <p><a href="http://localhost/WebD/home/home.php">立即登录</a></p>
+    </div>
+</div>
 
 <script>
     const pathname = window.document.location.pathname;

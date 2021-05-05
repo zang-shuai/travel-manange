@@ -4,16 +4,81 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<link rel="stylesheet" href="styles/admin.css">
 <body>
-<table id="usertable" border="2px black solid">
-    <tr>
-        <td>序号</td>
-        <td>姓名</td>
-        <td>年龄</td>
-        <td>电话号码</td>
-    </tr>
-</table>
-<div id="div1"></div>
+<div class="wrapper">
+
+    <nav>
+
+        <header>
+            <span></span>
+            John Doe
+            <a></a>
+        </header>
+
+        <ul>
+            <li><span>Navigation</span></li>
+            <li><a class="active" href="manageusers.html">管理用户</a></li>
+            <li><a href="managetourist.html">管理旅游景点</a></li>
+            <li><a href="manageguider.html">管理导游</a></li>
+            <li><a href="manageplan.html">管理计划</a></li>
+            <li><a href="managevehicle.html">管理交通工具</a></li>
+            <li><a>GitHub</a></li>
+            <li><a>FAQ</a></li>
+            <li><span>Other</span></li>
+            <li><a>Search</a></li>
+            <li><a>Settings</a></li>
+            <li><a>Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <main>
+
+        <h1>Flexbox Admin Template</h1>
+
+        <div class="flex-grid">
+            <div>
+                <table id="usertable" border="2px black solid">
+                    <tr>
+                        <td>序号</td>
+                        <td>姓名</td>
+                        <td>年龄</td>
+                        <td>电话号码</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Font Awesome</h2>
+                <ul>
+                    <li>no images</li>
+                    <li>no extra retina sprites</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="flex-grid">
+            <div>
+                <h2>Headline</h2>
+                Some Content
+            </div>
+            <div>
+                <h2>Headline</h2>
+                Some Content
+            </div>
+        </div>
+
+        <div class="flex-grid">
+            <div>
+                <h2>Headline</h2>
+                Some Content
+            </div>
+        </div>
+
+    </main>
+
+</div>
 
 <script>
     var xmlhttp = new XMLHttpRequest();

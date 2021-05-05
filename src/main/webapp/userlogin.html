@@ -2,16 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login/Sign Up</title>
 </head>
+<!--  Styles  -->
+<link rel="stylesheet" href="styles/userlogin.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 <body>
-<form id="loginform" method="post">
-    电话：<input name="utelephonenumber" type="text"><br>
-    密码：<input name="upassword" type="password"><br>
-    <input type="submit">
-</form>
+<div class="login-page" >
+    <div class="form" >
+        <form class="login-form" id="loginform" method="post" >
+            电话：<input name="utelephonenumber" type="text"  placeholder="电话号码" required>
+            密码：<input name="upassword" type="password" minlength="6" maxlength="32" placeholder="密码" required/>
+                   <input type="submit">
 
-<script>
+            <p>还未注册？  <a href="userrgister.html">前往注册</a></p>
+        </form>
+    </div>
+</div>
+
+<script >
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
     document.getElementById("loginform").setAttribute("action", pa + "/userLoginServlet");
