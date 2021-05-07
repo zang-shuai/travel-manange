@@ -112,7 +112,7 @@ main {
     flex: 1;
     padding: 25px;
     background: #f5f5f5;
-    flex-direction: column;
+    /*flex-direction: column;*/
 }
 
 main h1 {
@@ -127,17 +127,18 @@ main h1 {
 
 .flex-grid {
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     flex: 2;
+    flex-wrap: wrap;
 }
 
 .flex-grid > div {
-    flex: 2;
     margin: 0 20px 20px 0;
     padding: 15px;
     border: 1px solid #ddd;
     background: #fff;
-    flex-direction: column;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
 }
 
 .flex-grid > div:last-child {
