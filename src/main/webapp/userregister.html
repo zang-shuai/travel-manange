@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>userregister</title>
 </head>
 <body>
 <link rel="stylesheet" href="styles/userregister.css">
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/user.js"></script>
 <div class="lg_layout">
     <div class="lg_left">
         <p>新用户注册</p>
@@ -13,7 +15,6 @@
     </div>
 
     <div class="lg_center">
-
 
 
         <div class="lg_form">
@@ -43,9 +44,9 @@
                     </tr>
 
                     <tr>
-                        <td class="td_left"><label>头像</label></td>
+                        <td class="td_left"><label for="file">头像</label></td>
                         <td class="td_right">
-                            <input name="uhead" type="file"><br>
+                            <input name="uhead" id="file" type="file"><br>
                             <input name="upower" type="hidden" value="1">
                         </td>
                     </tr>
@@ -60,14 +61,16 @@
 
     <div class="lg_right">
         <p>已有账号?</p>
-        <p><a href="http://localhost/WebD/home/home.php">立即登录</a></p>
+        <p><a href="userlogin.html">立即登录</a></p>
     </div>
-</div>
 
+</div>
+<footer class="last"></footer>
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
     document.getElementById("userform").setAttribute("action",pa+"/userRegisterServlet");
+
 </script>
 </body>
 </html>
