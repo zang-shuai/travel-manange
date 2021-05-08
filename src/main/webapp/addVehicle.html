@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>addVehicle</title>
 </head>
 <body>
-
-<form id="vehicleform" method="post">
-<!--    <select name="vtype">-->
-<!--        <option value="volvo">Volvo</option>-->
-<!--        <option value="saab">Saab</option>-->
-<!--        <option value="mercedes">Mercedes</option>-->
-<!--        <option value="audi">Audi</option>-->
-<!--    </select>-->
-    车牌：<input name="vtype" type="text"><br>
-    容量：<input name="vcapacity" type="number"><br>
-    <input type="submit">
-</form>
+<link rel="stylesheet" href="styles/userlogin.css">
+<div class="login-page" >
+    <div class="form" >
+        <form id="vehicleform" method="post">
+        <!--    <select name="vtype">-->
+        <!--        <option value="volvo">Volvo</option>-->
+        <!--        <option value="saab">Saab</option>-->
+        <!--        <option value="mercedes">Mercedes</option>-->
+        <!--        <option value="audi">Audi</option>-->
+        <!--    </select>-->
+            车牌：<input name="vtype" type="text"><br>
+            容量：<input name="vcapacity" type="number"><br>
+            <input type="submit">
+        </form>
+    </div>
+</div>
 
 <script>
     const pathname = window.document.location.pathname;

@@ -9,7 +9,7 @@ body {
 }
 /*The Login page*/
 .login-page {
-    padding: 6% 0 0;
+    padding: 5% 0 0;
     width: 360px;
     margin: auto;
 }
@@ -30,8 +30,8 @@ body {
     outline: 1em;
     border: 3px solid navajowhite;
     font-family: Baskerville;
-    margin: 0 0 35px;
-    padding: 15px;
+    margin: 0 0 15px;
+    padding: 3px;
     box-sizing: border-box;
     font-size: 1em;
     width: 100%;
@@ -39,13 +39,13 @@ body {
 }
 /*Customizing the reddish buttons for submitting the form.*/
 .form button {
-    font-family: monospace;
+    /*font-family: monospace;*/
     outline: 0;
-    color: #ffffff;
-    width: 100%;
+    color: black;
+    /*width: 100%;*/
     border: 0;
     font-size: 1em;
-    background-color: rgba(252, 189, 30, 0.85);
+    background-color: white;
     padding: 15px;
     border-radius: 6px;
     text-transform: uppercase;
@@ -145,7 +145,7 @@ body {
 /*Hovering effect over button*/
 .form button:hover,
 .form button:active {
-    background: #90000f;
+    background: navajowhite;
     position: relative;
     top: 1px;
 }
