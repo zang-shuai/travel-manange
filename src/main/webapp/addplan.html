@@ -2,42 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>addplan</title>
 </head>
+<link rel="stylesheet" href="styles/add.css">
 <body>
-<form id="guiderform" method="post">
-    <label>
-        选择景点：
-        <input name="gname" type="text">
-    </label><br>
-    <label>
-        开始日期：
-        <input name="pstartdate" type="date">
-    </label><br>
-    <label>
-        结束日期：
-        <input name="penddate" type="date">
-    </label><br>
-    <label>
-        价格：
-        <input name="pprice" type="number">
-    </label><br>
-    <label>
-        最大游客数：
-        <input name="pmaxcount" type="number">
-    </label><br>
-
-
-    点击查看导游：
-    <button type="button" onclick="refresh()">刷新</button>
-
-
-
-
-    <input type="submit">
-</form>
-
+<div class="login-page" >
+    <div class="form" >
+        <form id="guiderform" method="post">
+            <label>
+                选择景点：
+                <input name="gname" type="text">
+            </label><br>
+            <label>
+                开始日期：
+                <input name="pstartdate" type="date">
+            </label><br>
+            <label>
+                结束日期：
+                <input name="penddate" type="date">
+            </label><br>
+            <label>
+                价格：
+                <input name="pprice" type="number">
+            </label><br>
+            <label>
+                最大游客数：
+                <input name="pmaxcount" type="number">
+            </label><br>
+            点击查看导游：
+            <button type="button" onclick="refresh()">刷新</button>
+            <input type="submit">
+        </form>
+    </div>
+</div>
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);

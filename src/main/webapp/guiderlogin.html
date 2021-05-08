@@ -2,15 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>guiderlogin</title>
 </head>
+<link rel="stylesheet" href="styles/userlogin.css">
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/user.js"></script>
 <body>
-<form id="loginform" method="post">
-    电话：<input name="gtelephonenumber" type="text"><br>
-    密码：<input name="gpassword" type="password"><br>
-    <input type="submit">
-</form>
-
+<div class="login-page" >
+    <div class="form" >
+        <form id="loginform" method="post">
+            电话：<input name="gtelephonenumber" type="text"><br>
+            密码：<input name="gpassword" type="password"><br>
+            <input type="submit">
+        </form>
+    </div>
+</div>
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);

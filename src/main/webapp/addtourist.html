@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>addtodolist</title>
 </head>
+<link rel="stylesheet" href="styles/add.css">
 <body>
-
-
-<div >
-    <form id="addtouristform" enctype="multipart/form-data" method="post">
-        旅游地点：<input type="text" name="tname"><br>
-        门票价格：<input type="text" name="tprice"><br>
-        简介：<textarea name="tintroduce" rows="10" cols="30"></textarea><br>
-        景点图片：
-        <input type="file" name="timage" multiple accept='image/*'><br>
-        <input type="submit">
-    </form>
+<div class="login-page" >
+    <div class="form" >
+        <form id="addtouristform" enctype="multipart/form-data" method="post">
+            旅游地点：<input type="text" name="tname"><br>
+            门票价格：<input type="text" name="tprice"><br>
+            简介：<textarea name="tintroduce" rows="10" cols="30"></textarea><br>
+            景点图片：
+            <input type="file" name="timage" multiple accept='image/*'><br>
+            <input type="submit">
+        </form>
+    </div>
 </div>
-
 
 <script>
     const pathname = window.document.location.pathname;
