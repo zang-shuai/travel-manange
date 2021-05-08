@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <title>Login/Sign Up</title>
 </head>
+<!--  Styles  -->
 <link rel="stylesheet" href="styles/userlogin.css">
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/user.js"></script>
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 <body>
 <div class="login-page" >
     <div class="form" >
         <form class="login-form" id="loginform" method="post" >
             电话：<input name="utelephonenumber" type="text"  placeholder="电话号码" required>
             密码：<input name="upassword" type="password" minlength="6" maxlength="32" placeholder="密码" required/>
-            <input type="submit">
+                   <input type="submit">
 
-            <p>还未注册？<a href="userregister.html">前往注册</a></p>
+            <p>还未注册？  <a href="userrgister.html">前往注册</a></p>
         </form>
     </div>
 </div>
-<footer class="last"></footer>
+
 <script >
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);

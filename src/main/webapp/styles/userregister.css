@@ -5,20 +5,16 @@
 }
 body{
     padding-top: 25px;
-    background: url("images/register.png") no-repeat center;
-
 }
 .lg_layout{
-    width: 1150px;
-    height: 500px;
+    width: 1200px;
+    height: 560px;
     margin: auto;
-    border: 8px solid rgba(252, 189, 30, 0.85);
-    background-color: rgba(214, 221, 224, 0.4);
-
+    background: url("images/changchen.jpg") no-repeat top right;
 }
 
 label{
-    color: black;
+    color: white;
     font-size: 18px;
 }
 
@@ -28,8 +24,8 @@ label{
     margin: 15px;
 }
 .lg_left > p:first-child{
+    color:deepskyblue;
     font-size: 20px;
-    color: rgba(252, 189, 30, 0.85);
 }
 
 .lg_left > p:last-child{
@@ -56,38 +52,36 @@ label{
 
 }
 .lg_right p a {
-    color:rgba(252, 189, 30, 0.85);
+    color:skyblue;
     font-size: 20px;
 }
 
 .td_left{
-    width: 80px;
+    width: 130px;
     text-align: right;
-    height: 60px;
+    height: 50px;
 }
 .td_right{
     padding-left: 50px ;
-    color:rgba(252, 189, 30, 0.85);
+    color: skyblue;
 }
 
-#username,#email,#name,#tel,#birthday,#file,#password{
+#username,#email,#name,#tel,#birthday,#gender{
     width: 200px;
     height: 32px;
-    border: 3px solid rgba(252, 189, 30, 0.85);
-    border-radius: 10px;
+    border: 3px solid;
     padding-left: 10px;
     /*border-image-source: url(../images/who.jpg);*/
     border-image-slice: 20;
     border-image-repeat:round;
     border-image-width: 8px;
-    color: black;
 }
 
 #sub{
     width: 150px;
     height: 40px;
-    background-color: rgba(252, 189, 30, 0.85);
-    border: 1px solid rgba(252, 189, 30, 0.85);
+    background-color: skyblue;
+    border: 1px solid black;
     border-radius: 5px;
     colspan:2;
     align:center;
@@ -207,39 +201,9 @@ a:active {color:#0000FF;}  /* 鼠标点击时 */
     }
 }
 
-.last{
-    position: relative;
-    margin: 0 auto 50px;
-    text-align: left;
-    border-radius: 7px;
-    max-width: 270px;
-}
-
-ul.pagination {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-    background-color: #f1f1f1;
-}
-
-ul.pagination li {display: inline;}
-
-ul.pagination li a {
-    float: left;
-    padding: 16px;
-    text-decoration: none;
-    transition: background-color .8s;
-    border: 1px solid #ddd;
-}
-
-/*ul.pagination li a.active {*/
-/*    background-color: rgba(252, 189, 30, 0.85);*/
-/*    color: white;*/
-/*    border: 1px solid #ddd;*/
-/*}*/
-
-ul.pagination li a:hover {
-    background-color: rgba(252, 189, 30, 0.85);
+:root
+{
+    background:skyblue;
 }
 
 

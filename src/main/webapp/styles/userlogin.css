@@ -3,14 +3,13 @@
 }
 /*Styling the body & background*/
 body {
-    background-image: url("images/huangshan.jpg");
     height: 100vh;
-    background-position: center;
+    background: url("images/huangshan.jpg") no-repeat center;
     background-size: cover;
 }
 /*The Login page*/
 .login-page {
-    padding: 7% 0 0;
+    padding: 6% 0 0;
     width: 360px;
     margin: auto;
 }
