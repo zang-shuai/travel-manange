@@ -4,7 +4,7 @@ package com.tjut.service;
 import com.tjut.entity.Plan;
 import com.tjut.entity.WorkTime;
 
-import javax.resource.spi.work.Work;
+//import javax.resource.spi.work.Work;
 import java.util.List;
 
 /**
