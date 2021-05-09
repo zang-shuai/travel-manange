@@ -2,6 +2,7 @@ package com.tjut.service.impl;
 
 import com.tjut.dao.PlanDao;
 import com.tjut.dao.impl.PlanDaoImpl;
+import com.tjut.entity.Guider;
 import com.tjut.entity.Plan;
 import com.tjut.entity.WorkTime;
 import com.tjut.entity.WorkTimeTable;
@@ -11,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanServiceImpl implements PlanService {
-    private PlanDao planDao=new PlanDaoImpl();
+    private PlanDao planDao = new PlanDaoImpl();
+
     @Override
     public List<Plan> findAll() {
         return null;
@@ -38,20 +40,34 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<WorkTime> getAllGuidersWorkTime() {
+    public List<WorkTimeTable> getAllGuidersWorkTime() {
         List<Plan> all = planDao.findAll();
-        List<WorkTimeTable> l=new ArrayList<>();
-        List<Integer> guider=new ArrayList<>();
-        for(Plan p:all){
+        List<WorkTimeTable> l = new ArrayList<>();
+        List<Integer> guider = new ArrayList<>();
+        for (Plan p : all) {
             Integer gId = p.getGId();
-            boolean contains = guider.contains(gId);
-            if(contains){
-
-            }else {
-
+            if (guider.contains(gId)) {
+                for (WorkTimeTable w : l) {
+                    if (w.getG().getGId().equals(gId)) {
+                        WorkTime time = new WorkTime();
+                        time.setStart(p.getPStartDate());
+                        time.setEnd(p.getPEndDate());
+                        w.add(time);
+                    }
+                }
+            } else {
+                guider.add(gId);
+                WorkTimeTable workTimeTable = new WorkTimeTable();
+                WorkTime time = new WorkTime();
+                time.setStart(p.getPStartDate());
+                time.setEnd(p.getPEndDate());
+                Guider guider1 = new Guider();
+                workTimeTable.setG(guider1);
+                workTimeTable.add(time);
+                l.add(workTimeTable);
             }
         }
-        return null;
+        return l;
     }
 
 //    1. 程序的输入数据

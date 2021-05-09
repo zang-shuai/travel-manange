@@ -12,6 +12,9 @@ public class WorkTimeTable {
         return g;
     }
 
+    public void add(WorkTime w){
+        l.add(w);
+    }
     public void setG(Guider g) {
         this.g = g;
     }

@@ -3,6 +3,7 @@ package com.tjut.service;
 
 import com.tjut.entity.Plan;
 import com.tjut.entity.WorkTime;
+import com.tjut.entity.WorkTimeTable;
 
 //import javax.resource.spi.work.Work;
 import java.util.List;
@@ -21,7 +22,7 @@ public interface PlanService {
 
     List<Plan> findByGId(Integer gid);
 
-    List<WorkTime> getAllGuidersWorkTime();
+    List<WorkTimeTable> getAllGuidersWorkTime();
 
     List<Plan> findByTId(Integer tid);
 

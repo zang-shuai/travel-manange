@@ -16,8 +16,6 @@
 <div id="div1"></div>
 
 <script>
-
-
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "findAllVehicleServlet", true);
     xmlhttp.send();
@@ -26,7 +24,6 @@
             //获取服务器的响应结果
             let responseText = xmlhttp.responseText;
             let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
-
             for (let obj in arr) {
                 let look = []
                 let tr = document.createElement("tr")
@@ -42,9 +39,7 @@
                 document.getElementById("vehicletable").appendChild(tr);
             }
         }
-
     }
-
 </script>
 </body>
 </html>

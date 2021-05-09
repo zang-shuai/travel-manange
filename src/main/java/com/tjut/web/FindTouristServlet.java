@@ -17,13 +17,8 @@ public class FindTouristServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-
-
-
         HttpSession session = request.getSession();
-
         Tourist user = (Tourist) session.getAttribute("tourist");
-
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(user);
         response.getWriter().write(json);
