@@ -10,17 +10,16 @@
     <div id="tour">
         <label>
             选择景点：
-            <!--            <input name="gname" type="text">-->
         </label><br>
 
     </div>
     <label>
         开始日期：
-        <input name="pstartdate" type="date">
+        <input id="startTime" name="pstartdate" type="date">
     </label><br>
     <label>
         结束日期：
-        <input name="penddate" type="date">
+        <input id="endTime" name="penddate" type="date">
     </label><br>
     <label>
         价格：
@@ -33,7 +32,8 @@
 
 
     点击查看导游：
-    <button type="button" onclick="refresh()">刷新</button>
+    <div id="guider"></div>
+<!--    <button type="button" onclick="refresh()">刷新</button>-->
 
 
     <input type="submit">
@@ -46,15 +46,46 @@
 
     //查看导游数目
     function refresh() {
+        let endTime = document.getElementById("endTime").toString()
+        let startTime = document.getElementById("startTime").toString()
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "findFreeGuiderServlet", true);
+        xmlhttp.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
         xmlhttp.send();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-
+                let responseText = xmlhttp.responseText
+                alert(responseText)
             }
         }
     }
+
+
+    let xmlhttp1 = new XMLHttpRequest();
+    // xmlhttp1.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
+    xmlhttp1.open("POST", "findFreeGuiderServlet" , true);
+    xmlhttp1.send();
+    xmlhttp1.onreadystatechange = function () {
+        if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
+            let responseText = xmlhttp1.responseText
+            let elementById = document.getElementById("guider");
+            let arr = JSON.parse(responseText);
+            // elementById.innerHTML=responseText
+            console.log(arr)
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     //获取所有旅游景点
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "findAllTouristServlet", true);
