@@ -11,16 +11,8 @@
         <label>
             选择景点：
         </label><br>
-
     </div>
-    <label>
-        开始日期：
-        <input id="startTime" name="pstartdate" type="date">
-    </label><br>
-    <label>
-        结束日期：
-        <input id="endTime" name="penddate" type="date">
-    </label><br>
+
     <label>
         价格：
         <input name="pprice" type="number">
@@ -31,11 +23,25 @@
     </label><br>
 
 
+    <label>
+        开始日期：
+        <input id="startTime" name="pstartdate" type="date">
+    </label>
+    <label>
+        结束日期：
+        <input id="endTime" name="penddate" type="date">
+    </label><br>
+    <div>
+        可供选择的导游：
+        <div id="guidertime"></div>
+    </div>
+
+
+    <!--    <div id="guidertime"></div>-->
+
+
     点击查看导游：
     <div id="guider"></div>
-<!--    <button type="button" onclick="refresh()">刷新</button>-->
-
-
     <input type="submit">
 </form>
 
@@ -44,43 +50,111 @@
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
     document.getElementById("guiderform").setAttribute("action", pa + "/addGuiderServlet");
 
-    //查看导游数目
-    function refresh() {
-        let endTime = document.getElementById("endTime").toString()
-        let startTime = document.getElementById("startTime").toString()
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                let responseText = xmlhttp.responseText
-                alert(responseText)
+
+    function addDate(date, days) {
+        var d = new Date(date);
+        d.setDate(d.getDate() + days);
+        var m = d.getMonth() + 1;
+        if (m.toString().length === 1) {
+            m = '0' + m
+        }
+        let da = d.getDate();
+        if (da.toString().length === 1) {
+            da = '0' + da
+        }
+        return d.getFullYear() + '-' + m + '-' + da;
+    }
+
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(
+                    RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+    let date = new Date().format("yyyy-MM-dd");
+    let begin = addDate(date, 1)
+    let end = addDate(date, 30)
+    document.getElementById("startTime").setAttribute("min", begin)
+    document.getElementById("startTime").setAttribute("max", end)
+    document.getElementById("startTime").setAttribute("value", begin)
+    document.getElementById("endTime").setAttribute("min", begin)
+    document.getElementById("endTime").setAttribute("max", end)
+
+
+    let xmlhttp1 = new XMLHttpRequest();
+    // xmlhttp1.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
+    xmlhttp1.open("POST", "findFreeGuiderServlet", true);
+    xmlhttp1.send();
+    xmlhttp1.onreadystatechange = function () {
+        if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
+            let responseText = xmlhttp1.responseText
+            let arr = JSON.parse(responseText);
+            let guidertime = document.getElementById("guidertime");
+            for (let obj in arr) {
+                let arrElement = arr[obj];
+                let gname = arrElement["g"]["gname"];
+                let worktimelist = arrElement["l"];
+                let htmlDivElement = document.createElement("input");
+                let span = document.createElement("span")
+                htmlDivElement.type = "radio"
+                htmlDivElement.name = "guider"
+                htmlDivElement.value = gname
+                span.innerHTML = gname
+                guidertime.appendChild(htmlDivElement)
+                guidertime.appendChild(span)
+                guidertime.appendChild(document.createElement("br"))
+
+                let guidertimetable = document.createElement("table")
+                guidertimetable.style = "border:1px black solid"
+                let htmltrElement1 = document.createElement("tr");
+                let htmltdElementstart1 = document.createElement("td");
+                let htmltdElementend1 = document.createElement("td");
+                htmltdElementstart1.innerHTML = "开始时间"
+                htmltdElementend1.innerHTML = "结束时间"
+                htmltrElement1.appendChild(htmltdElementstart1)
+                htmltrElement1.appendChild(htmltdElementend1)
+                guidertimetable.appendChild(htmltrElement1)
+
+
+                for (let worktime in worktimelist) {
+                    let worktimestart = new Date(worktimelist[worktime]["start"]).format("yyyy-MM-dd");
+                    let worktimeend = new Date(worktimelist[worktime]["end"]).format("yyyy-MM-dd");
+                    let htmltrElement = document.createElement("tr");
+                    let htmltdElementstart = document.createElement("td");
+                    let htmltdElementend = document.createElement("td");
+                    htmltdElementstart.innerHTML = worktimestart
+                    htmltdElementend.innerHTML = worktimeend
+                    htmltrElement.appendChild(htmltdElementstart)
+                    htmltrElement.appendChild(htmltdElementend)
+                    guidertimetable.appendChild(htmltrElement)
+                }
+                guidertime.appendChild(guidertimetable)
             }
         }
     }
 
 
-    let xmlhttp1 = new XMLHttpRequest();
-    // xmlhttp1.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
-    xmlhttp1.open("POST", "findFreeGuiderServlet" , true);
-    xmlhttp1.send();
-    xmlhttp1.onreadystatechange = function () {
-        if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
-            let responseText = xmlhttp1.responseText
-            let elementById = document.getElementById("guider");
-            let arr = JSON.parse(responseText);
-            // elementById.innerHTML=responseText
-            console.log(arr)
-        }
-    }
 
-
-
-
-
-
-
-
+    var startTime=document.getElementById("startTime");
+    startTime.addEventListener("input",function(e){
+        var startTime=document.getElementById("startTime").value
+        console.log(startTime);
+    })
 
 
 

@@ -26,39 +26,14 @@ public class FindFreeGuiderServlet extends HttpServlet {
          * 找到所有计划时间和导游
          * 找到所有导游及他们的工作时间
          * */
-
-
-//        Date startTime = new Date();
-//        Date endTime = new Date();
-//        startTime.setTime(Long.parseLong(request.getParameter("startTime")));
-//        endTime.setTime(Long.parseLong(request.getParameter("endTime")));
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         PlanService planService = new PlanServiceImpl();
         List<WorkTimeTable> allGuidersWorkTime = planService.getAllGuidersWorkTime();
-//        System.out.println(allGuidersWorkTime);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(allGuidersWorkTime);
         System.out.println(json);
         response.getWriter().write(json);
-//        for (WorkTimeTable ws : allGuidersWorkTime) {
-//            List<WorkTime> l = ws.getL();
-//            List<Date> times = new ArrayList<>();
-//            Date now = new Date();
-//            times.add(now);
-//            for (WorkTime t : l) {
-//                times.add(t.getStart());
-//                times.add(t.getEnd());
-//            }
-//            times.add(getMonthDate(now, 1));
-//            boolean flag = false;
-//            for (int i = 0; i < times.size() - 1; i++) {
-//                if (times.get(i).compareTo(startTime) > 0 && times.get(i + 1).compareTo(endTime) < 0 && ((i & 1) == 0)) {
-//                    flag = true;
-//                    break;
-//                }
-//            }
-//
-//
-//        }
     }
 
     public static Date getMonthDate(Date startDate, int month) {
