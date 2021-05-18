@@ -6,6 +6,7 @@
 
 </head>
 <body>
+
 <form id="guiderform" method="post">
     <div id="tour">
         <label>
@@ -44,7 +45,6 @@
     <div id="guider"></div>
     <input type="submit">
 </form>
-
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
@@ -95,7 +95,8 @@
     document.getElementById("endTime").setAttribute("min", begin)
     document.getElementById("endTime").setAttribute("max", end)
 
-
+    let arr = undefined;
+    let gname = undefined;
     let xmlhttp1 = new XMLHttpRequest();
     // xmlhttp1.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
     xmlhttp1.open("POST", "findFreeGuiderServlet", true);
@@ -103,13 +104,15 @@
     xmlhttp1.onreadystatechange = function () {
         if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
             let responseText = xmlhttp1.responseText
-            let arr = JSON.parse(responseText);
+            arr = JSON.parse(responseText);
             let guidertime = document.getElementById("guidertime");
             for (let obj in arr) {
                 let arrElement = arr[obj];
-                let gname = arrElement["g"]["gname"];
+                gname = arrElement["g"]["gname"];
                 let worktimelist = arrElement["l"];
                 let htmlDivElement = document.createElement("input");
+                htmlDivElement.setAttribute("id", gname)
+                htmlDivElement.disabled = true
                 let span = document.createElement("span")
                 htmlDivElement.type = "radio"
                 htmlDivElement.name = "guider"
@@ -150,14 +153,85 @@
 
 
 
-    var startTime=document.getElementById("startTime");
-    startTime.addEventListener("input",function(e){
-        var startTime=document.getElementById("startTime").value
-        console.log(startTime);
+    function disabledradio() {                           //取消radio的选择
+        var x = document.getElementsByName("guider");  //获取所有name=brand的元素
+        for (var i = 0; i < x.length; i++) { //对所有结果进行遍历，如果状态是被选中的，则将其选择取消
+            if (x[i].disabled === false) {
+                x[i].disabled = true;
+            }
+        }
+    }
+
+    function clearradio() {                           //取消radio的选择
+        var x = document.getElementsByName("guider");  //获取所有name=brand的元素
+        for (var i = 0; i < x.length; i++) { //对所有结果进行遍历，如果状态是被选中的，则将其选择取消
+            if (x[i].checked === true) {
+                x[i].checked = false;
+            }
+        }
+    }
+
+    function selectguider() {
+        let startTime = document.getElementById("startTime").value;
+        let endTime = document.getElementById("endTime").value;
+        for (let obj in arr) {
+            let arrElement = arr[obj];
+            let guidername = arrElement["g"]["gname"];
+            let worktimelist = arrElement["l"];
+            console.log(worktimelist.length)
+            worktimelist = worktimelist.sort((a, b) => {
+                return a["start"] - b["start"]
+            })
+            let guiderhastime = false
+            if (worktimelist.length === 0) {
+                guiderhastime = true
+            } else if (begin <= startTime && endTime < new Date(worktimelist[0]["start"]).format("yyyy-MM-dd")) {
+                guiderhastime = true
+            } else if (new Date(worktimelist[worktimelist.length - 1]["end"]).format("yyyy-MM-dd") < startTime && endTime <= end) {
+                console.log(new Date(worktimelist[worktimelist.length - 1]["end"]).format("yyyy-MM-dd"))
+                console.log(startTime)
+                console.log(endTime)
+                console.log(end)
+                guiderhastime = true
+            } else {
+                for (let i = 0; i < worktimelist.length - 1; i++) {
+                    let worktimestart = new Date(worktimelist[i + 1]["start"]).format("yyyy-MM-dd")
+                    let worktimeend = new Date(worktimelist[i]["end"]).format("yyyy-MM-dd")
+                    if (worktimeend < startTime && endTime < worktimestart) {
+                        guiderhastime = true
+                        break
+                    }
+                }
+            }
+            if (guiderhastime) {
+                document.getElementById(guidername).disabled = false;
+            }else {
+                document.getElementById(guidername).disabled = true;
+            }
+        }
+    }
+
+
+    let startTime = document.getElementById("startTime");
+    startTime.addEventListener("input", function (e) {
+        let startTime = document.getElementById("startTime").value;
+        let endTime = document.getElementById("endTime").value;
+        disabledradio()
+        clearradio()
+        if (endTime != null && endTime > startTime) {
+            selectguider();
+        }
     })
-
-
-
+    let endTime = document.getElementById("endTime");
+    endTime.addEventListener("input", function (e) {
+        let endTime = document.getElementById("endTime").value;
+        let startTime = document.getElementById("startTime").value;
+        disabledradio()
+        clearradio()
+        if (startTime != null && endTime > startTime) {
+            selectguider();
+        }
+    })
 
 
     //获取所有旅游景点
