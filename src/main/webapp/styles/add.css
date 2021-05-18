@@ -4,12 +4,12 @@
 /*Styling the body & background*/
 body {
     height: 100vh;
-    background: url("images/gugong.jpg") no-repeat center;
+    background: url("images/gugong.jpg") center;
     background-size: cover;
 }
 /*The Login page*/
 .login-page {
-    padding: 5% 0 0;
+    padding: 3% 0 0;
     width: 360px;
     margin: auto;
 }
@@ -42,11 +42,11 @@ body {
     /*font-family: monospace;*/
     outline: 0;
     color: black;
-    /*width: 100%;*/
+    width: 100%;
     border: 0;
     font-size: 1em;
     background-color: white;
-    padding: 15px;
+    /*padding: 15px;*/
     border-radius: 6px;
     text-transform: uppercase;
     cursor: pointer;
@@ -55,14 +55,14 @@ body {
     transition: 0.4s all ease-in;
 }
 
-.buttonload {
-    background-color: rgba(252, 189, 30, 0.85);
-    border: none;
-    color: white;
-    padding: 12px 16px;
-    font-size: 16px;
-    display: none;
-}
+/*.buttonload {*/
+/*    background-color: white;*/
+/*    border: none;*/
+/*    color: white;*/
+/*    padding: 12px 16px;*/
+/*    font-size: 16px;*/
+/*    display: none;*/
+/*}*/
 
 /*For the paragraphs*/
 .form p {
@@ -139,13 +139,14 @@ body {
 }
 /*The form's links*/
 .form a {
+    /*position: center;*/
     text-decoration: none;
-    color: #f2f2f2;
+    color: black;
 }
 /*Hovering effect over button*/
 .form button:hover,
 .form button:active {
-    background: navajowhite;
+    background: orangered;
     position: relative;
     top: 1px;
 }

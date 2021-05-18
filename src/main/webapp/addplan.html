@@ -2,49 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>addplan</title>
 </head>
+<link rel="stylesheet" href="styles/add.css">
 <body>
+<div class="login-page" >
+    <div class="form" >
+        <button><a href="manageplan.html ">返回管理界面</a></button><br>
+        <form id="guiderform" method="post">
+            <div id="tour">
+                <label>
+                    选择景点：
+                </label><br>
+            </div>
 
-<form id="guiderform" method="post">
-    <div id="tour">
-        <label>
-            选择景点：
-        </label><br>
+            <label>
+                价格：
+                <input name="pprice" type="number">
+            </label><br>
+            <label>
+                最大游客数：
+                <input name="pmaxcount" type="number">
+            </label><br>
+
+
+            <label>
+                开始日期：
+                <input id="startTime" name="pstartdate" type="date">
+            </label>
+            <label>
+                结束日期：
+                <input id="endTime" name="penddate" type="date">
+            </label><br>
+            <div>
+                可供选择的导游：
+                <div id="guidertime"></div>
+            </div>
+
+
+            <!--    <div id="guidertime"></div>-->
+
+
+            点击查看导游：
+            <div id="guider"></div>
+            <input type="submit">
+        </form>
     </div>
+</div>
 
-    <label>
-        价格：
-        <input name="pprice" type="number">
-    </label><br>
-    <label>
-        最大游客数：
-        <input name="pmaxcount" type="number">
-    </label><br>
-
-
-    <label>
-        开始日期：
-        <input id="startTime" name="pstartdate" type="date">
-    </label>
-    <label>
-        结束日期：
-        <input id="endTime" name="penddate" type="date">
-    </label><br>
-    <div>
-        可供选择的导游：
-        <div id="guidertime"></div>
-    </div>
-
-
-    <!--    <div id="guidertime"></div>-->
-
-
-    点击查看导游：
-    <div id="guider"></div>
-    <input type="submit">
-</form>
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
