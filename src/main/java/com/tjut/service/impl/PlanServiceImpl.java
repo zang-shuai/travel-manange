@@ -2,22 +2,29 @@ package com.tjut.service.impl;
 
 import com.tjut.dao.GuiderDao;
 import com.tjut.dao.PlanDao;
+import com.tjut.dao.TouristDao;
+import com.tjut.dao.TouristImgDao;
 import com.tjut.dao.impl.GuiderDaoImpl;
 import com.tjut.dao.impl.PlanDaoImpl;
-import com.tjut.entity.Guider;
-import com.tjut.entity.Plan;
-import com.tjut.entity.WorkTime;
-import com.tjut.entity.WorkTimeTable;
+import com.tjut.dao.impl.TouristDaoImpl;
+import com.tjut.dao.impl.TouristImgDaoImpl;
+import com.tjut.entity.*;
 import com.tjut.service.PlanService;
 
 import java.util.*;
 
 public class PlanServiceImpl implements PlanService {
-    private PlanDao planDao = new PlanDaoImpl();
+    private final PlanDao planDao = new PlanDaoImpl();
+    private final TouristDao touristDao = new TouristDaoImpl();
 
     @Override
     public List<Plan> findAll() {
-        return planDao.findAll();
+        List<Plan> all = planDao.findAll();
+        for (Plan p : all) {
+            Tourist t = touristDao.findById(p.getTId());
+            p.setTourist(t);
+        }
+        return all;
     }
 
     @Override
@@ -32,13 +39,17 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Plan findByPId(Integer pid) {
-        return null;
+        Plan byPId = planDao.findByPId(pid);
+        Tourist t = touristDao.findById(byPId.getTId());
+        byPId.setTourist(t);
+        return byPId;
     }
 
     @Override
     public List<Plan> findByGId(Integer gid) {
         return null;
     }
+
     @Override
     public List<WorkTimeTable> getAllGuidersWorkTime() {
 

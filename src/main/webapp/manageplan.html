@@ -24,6 +24,9 @@
 <div id="div1"></div>
 
 <script>
+
+
+
     Date.prototype.format = function (fmt) {
         var o = {
             "M+": this.getMonth() + 1,                 //月份
@@ -60,13 +63,8 @@
                 let look = []
                 let tr = document.createElement("tr")
                 let arrElement = arr[obj]
-
                 let pstartDate = new Date(arrElement["pstartDate"]).format("yyyy-MM-dd");
                 let pendDate = new Date(arrElement["pendDate"]).format("yyyy-MM-dd");
-
-
-                // console.log(date)
-
                 look.push(arrElement["pid"])
                 look.push(arrElement["tname"])
                 look.push(arrElement["gname"])
@@ -75,6 +73,7 @@
                 look.push(arrElement["pprice"])
                 look.push(arrElement["pmaxCount"])
                 look.push(arrElement["pcount"])
+                // look.push()
                 if(date<pstartDate){
                     look.push("正在报名中")
                 }else if(date>pendDate){
@@ -87,6 +86,7 @@
                     td.innerHTML = look[x]
                     tr.appendChild(td)
                 }
+
                 document.getElementById("inplantable").appendChild(tr);
             }
         }

@@ -2,6 +2,7 @@ package com.tjut.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Plan implements Serializable {
     private Integer PId;
@@ -14,6 +15,7 @@ public class Plan implements Serializable {
     private Float PPrice;
     private Integer PMaxCount;
     private Integer PCount;
+    private Tourist tourist;
 
     @Override
     public String toString() {
@@ -28,7 +30,16 @@ public class Plan implements Serializable {
                 ", PPrice=" + PPrice +
                 ", PMaxCount=" + PMaxCount +
                 ", PCount=" + PCount +
+                ", tourist=" + tourist +
                 '}';
+    }
+
+    public Tourist getTourist() {
+        return tourist;
+    }
+
+    public void setTourist(Tourist tourist) {
+        this.tourist = tourist;
     }
 
     public String getTName() {

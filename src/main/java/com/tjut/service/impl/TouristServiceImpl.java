@@ -53,7 +53,10 @@ public class TouristServiceImpl implements TouristService {
 
     @Override
     public Tourist findTouristById(Integer id) {
-        return null;
+        Tourist byId = dao.findById(id);
+        List<TouristImg> byTId = touristImgDao.findByTId(byId.getTId());
+        byId.setTouristImg(byTId);
+        return byId;
     }
 
     @Override

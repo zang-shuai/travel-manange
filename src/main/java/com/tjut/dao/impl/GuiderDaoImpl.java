@@ -64,7 +64,7 @@ public class GuiderDaoImpl implements GuiderDao {
     }
 
     @Override
-    public Guider findById(String gid) {
+    public Guider findById(Integer gid) {
         String sql = "select *from guider where gid=?";
         Guider guider;
         try {

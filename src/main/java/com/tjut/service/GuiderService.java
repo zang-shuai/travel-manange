@@ -19,7 +19,7 @@ public interface GuiderService {
 
     Guider findByTelephoneNumber(String parseInt);
 
-    Guider findById(String cid);
+    Guider findById(Integer cid);
 
     void update(Guider Guider);
 }

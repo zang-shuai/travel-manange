@@ -19,7 +19,7 @@ public interface GuiderDao {
 
     Guider findByTelephoneNumber(String parseInt);
 
-    Guider findById(String cid);
+    Guider findById(Integer id);
 
     void update(Guider Guider);
 }
