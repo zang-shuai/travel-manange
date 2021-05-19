@@ -36,11 +36,8 @@
         可供选择的导游：
         <div id="guidertime"></div>
     </div>
-    选择交通工具：
-    <div id="vehicle"></div>
     <div id="guider"></div>
-    <input id="hiddenvehicle" type="hidden" name="vehicle"/>
-    <input id="submit" type="submit" disabled>
+    <input id="submit" type="submit">
 </form>
 <script>
     const pathname = window.document.location.pathname;
@@ -265,77 +262,76 @@
         }
     }
 
-
-    let vehicleidlist = []
-    let arrElement = undefined;
-    var xmlhttp2 = new XMLHttpRequest();
-    xmlhttp2.open("POST", "findAllVehicleServlet", true);
-    xmlhttp2.send();
-    xmlhttp2.onreadystatechange = function () {
-        if (xmlhttp2.readyState === 4 && xmlhttp2.status === 200) {
-            //获取服务器的响应结果
-            let responseText = xmlhttp2.responseText;
-            let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
-            for (let obj in arr) {
-                let look = []
-                let tr = document.createElement("tr")
-                arrElement = arr[obj];
-                let checkbox = document.createElement("input")
-                checkbox.type = "checkbox"
-                checkbox.id = arrElement['vid'] + arrElement["vtype"]
-                checkbox.name = arrElement['vid']
-                checkbox.value = arrElement["vcapacity"]
-
-                checkbox.addEventListener("input", function (e) {
-                    let checked = checkbox.checked;
-                    let precount = parseInt(count)
-                    if (checked) {
-                        count += parseInt(checkbox.value)
-                        console.log("+", count)
-                    } else {
-                        count -= parseInt(checkbox.value)
-                        console.log("-", count)
-                    }
-                    let pmaxcount = document.getElementById("pmaxcount");
-                    if ((pmaxcount.value != null) && parseInt(pmaxcount.value) <= count) {
-                        if (precount >= parseInt(pmaxcount.value) && precount < count) {
-                            alert("选择车辆过多，会造成浪费，建议减少车辆")
-                        }
-                        submit.disabled = false;
-                    } else {
-                        submit.disabled = true;
-                    }
-                })
-
-                let htmlTableDataCellElement = document.createElement("td");
-                htmlTableDataCellElement.appendChild(checkbox)
-                tr.appendChild(htmlTableDataCellElement)
-                look.push(arrElement["vid"])
-                vehicleidlist.push(arrElement['vid'])
-                look.push(arrElement["vtype"])
-                look.push(arrElement["vcapacity"])
-                for (let x in look) {
-                    let td = document.createElement("td")
-                    td.innerHTML = look[x]
-                    tr.appendChild(td)
-                }
-                document.getElementById("vehicle").appendChild(tr);
-            }
-        }
-    }
-    let submitBtn = document.getElementById("submit");
-
-    submitBtn.onclick = function (event) {
-        let inputs = document.getElementsByTagName("input");
-        let boxs = "";
-        for (let i = 0; i < inputs.length; i++) {
-            if (inputs[i].type === "checkbox"&&inputs[i].checked === true) {
-                boxs=boxs+inputs[i].name+"-"
-            }
-        }
-        document.getElementById("hiddenvehicle").value=boxs
-        return true;
-    };
+    // let vehicleidlist = []
+    // let arrElement = undefined;
+    // var xmlhttp2 = new XMLHttpRequest();
+    // xmlhttp2.open("POST", "findAllVehicleServlet", true);
+    // xmlhttp2.send();
+    // xmlhttp2.onreadystatechange = function () {
+    //     if (xmlhttp2.readyState === 4 && xmlhttp2.status === 200) {
+    //         //获取服务器的响应结果
+    //         let responseText = xmlhttp2.responseText;
+    //         let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+    //         for (let obj in arr) {
+    //             let look = []
+    //             let tr = document.createElement("tr")
+    //             arrElement = arr[obj];
+    //             let checkbox = document.createElement("input")
+    //             checkbox.type = "checkbox"
+    //             checkbox.id = arrElement['vid'] + arrElement["vtype"]
+    //             checkbox.name = arrElement['vid']
+    //             checkbox.value = arrElement["vcapacity"]
+    //
+    //             checkbox.addEventListener("input", function (e) {
+    //                 let checked = checkbox.checked;
+    //                 let precount = parseInt(count)
+    //                 if (checked) {
+    //                     count += parseInt(checkbox.value)
+    //                     console.log("+", count)
+    //                 } else {
+    //                     count -= parseInt(checkbox.value)
+    //                     console.log("-", count)
+    //                 }
+    //                 let pmaxcount = document.getElementById("pmaxcount");
+    //                 if ((pmaxcount.value != null) && parseInt(pmaxcount.value) <= count) {
+    //                     if (precount >= parseInt(pmaxcount.value) && precount < count) {
+    //                         alert("选择车辆过多，会造成浪费，建议减少车辆")
+    //                     }
+    //                     submit.disabled = false;
+    //                 } else {
+    //                     submit.disabled = true;
+    //                 }
+    //             })
+    //
+    //             let htmlTableDataCellElement = document.createElement("td");
+    //             htmlTableDataCellElement.appendChild(checkbox)
+    //             tr.appendChild(htmlTableDataCellElement)
+    //             look.push(arrElement["vid"])
+    //             vehicleidlist.push(arrElement['vid'])
+    //             look.push(arrElement["vtype"])
+    //             look.push(arrElement["vcapacity"])
+    //             for (let x in look) {
+    //                 let td = document.createElement("td")
+    //                 td.innerHTML = look[x]
+    //                 tr.appendChild(td)
+    //             }
+    //             document.getElementById("vehicle").appendChild(tr);
+    //         }
+    //     }
+    // }
+    // let submitBtn = document.getElementById("submit");
+    //
+    // submitBtn.onclick = function (event) {
+    //     let inputs = document.getElementsByTagName("input");
+    //     let boxs = "";
+    //     for (let i = 0; i < inputs.length; i++) {
+    //         if (inputs[i].type === "checkbox"&&inputs[i].checked === true) {
+    //             boxs=boxs+inputs[i].name+"-"
+    //         }
+    //     }
+    //     document.getElementById("hiddenvehicle").value=boxs
+    //     return true;
+    // };
 
 </script>
 </body>

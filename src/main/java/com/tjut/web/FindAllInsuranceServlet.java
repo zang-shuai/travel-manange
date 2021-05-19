@@ -1,12 +1,9 @@
 package com.tjut.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tjut.service.VehicleService;
-import com.tjut.entity.User;
-import com.tjut.entity.Vehicle;
-import com.tjut.service.UserService;
-import com.tjut.service.impl.UserServiceImpl;
-import com.tjut.service.impl.VehicleServiceImpl;
+import com.tjut.entity.Insurance;
+import com.tjut.service.InsuranceService;
+import com.tjut.service.impl.InsuranceServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/findAllVehicleServlet")
-public class FindAllVehicleServlet extends HttpServlet {
+@WebServlet("/findAllInsuranceServlet")
+public class FindAllInsuranceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        VehicleService vehicleService=  new VehicleServiceImpl();
-        List<Vehicle> all = vehicleService.findAll();
+        InsuranceService insuranceService=  new InsuranceServiceImpl();
+        List<Insurance> all = insuranceService.findAll();
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(all);
         System.out.println(json);

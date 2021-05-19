@@ -1,6 +1,8 @@
 package com.tjut.web;
 
 import com.tjut.entity.Plan;
+import com.tjut.service.PlanService;
+import com.tjut.service.impl.PlanServiceImpl;
 import com.tjut.util.DateUtils;
 
 import javax.servlet.ServletException;
@@ -23,8 +25,6 @@ public class AddPlanServlet extends HttpServlet {
         String pstartdate =request.getParameter("pstartdate");
         String penddate = request.getParameter("penddate");
         Integer guider = Integer.valueOf(request.getParameter("guider"));
-        String vehicle = request.getParameter("vehicle");
-
         plan.setTId(tourist);
         plan.setGId(guider);
         plan.setPCount(0);
@@ -32,10 +32,10 @@ public class AddPlanServlet extends HttpServlet {
         plan.setPStartDate(DateUtils.string2Date(pstartdate));
         plan.setPEndDate(DateUtils.string2Date(penddate));
         plan.setPPrice(pprice);
-
-
-
-
+        System.out.println(plan);
+        PlanService p=new PlanServiceImpl();
+        p.add(plan);
+        response.sendRedirect("manageplan.html");
 
     }
 

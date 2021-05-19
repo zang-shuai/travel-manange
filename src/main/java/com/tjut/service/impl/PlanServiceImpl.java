@@ -22,7 +22,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void add(Plan plan) {
-
+        planDao.add(plan);
     }
 
     @Override

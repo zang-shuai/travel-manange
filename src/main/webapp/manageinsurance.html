@@ -5,21 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<a href="addplan.html">添加旅游计划</a>
-
-
+<a href="addInsurance.html">添加保险</a>
 <table id="insurancetable" border="2px black solid">
     <tr>
         <td>序号</td>
-        <td>旅游地</td>
-        <td>导游</td>
-        <td>开始时间</td>
-        <td>结束时间</td>
+        <td>类型</td>
         <td>价格</td>
-        <td>最大游客数</td>
-        <td>目前游客数</td>
-        <td>目前游客数</td>
-        <td>是否结束</td>
     </tr>
 </table>
 <div id="div1"></div>
@@ -37,10 +28,6 @@
                 let look = []
                 let tr = document.createElement("tr")
                 let arrElement = arr[obj];
-                look.push(arrElement["pid"])
-                look.push(arrElement["tid"])
-                look.push(arrElement["did"])
-                look.push(arrElement["vid"])
                 look.push(arrElement["vid"])
                 look.push(arrElement["vtype"])
                 look.push(arrElement["vcapacity"])
@@ -54,9 +41,5 @@
         }
     }
 </script>
-
-
-
-
 </body>
 </html>
