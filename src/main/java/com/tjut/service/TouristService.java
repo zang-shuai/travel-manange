@@ -8,6 +8,7 @@ import java.util.List;
 public interface TouristService {
     List<Tourist> findAll();
 
+    String getNameById(Integer id);
 
     Tourist login(Tourist tourist);
 

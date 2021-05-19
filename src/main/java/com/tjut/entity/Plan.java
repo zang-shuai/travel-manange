@@ -6,7 +6,9 @@ import java.util.Date;
 public class Plan implements Serializable {
     private Integer PId;
     private Integer TId;
+    private String TName;
     private Integer GId;
+    private String GName;
     private Date PStartDate;
     private Date PEndDate;
     private Float PPrice;
@@ -18,13 +20,31 @@ public class Plan implements Serializable {
         return "Plan{" +
                 "PId=" + PId +
                 ", TId=" + TId +
+                ", TName='" + TName + '\'' +
                 ", GId=" + GId +
+                ", GName='" + GName + '\'' +
                 ", PStartDate=" + PStartDate +
                 ", PEndDate=" + PEndDate +
                 ", PPrice=" + PPrice +
                 ", PMaxCount=" + PMaxCount +
                 ", PCount=" + PCount +
                 '}';
+    }
+
+    public String getTName() {
+        return TName;
+    }
+
+    public void setTName(String TName) {
+        this.TName = TName;
+    }
+
+    public String getGName() {
+        return GName;
+    }
+
+    public void setGName(String GName) {
+        this.GName = GName;
     }
 
     public Integer getPId() {

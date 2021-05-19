@@ -10,6 +10,7 @@ public interface GuiderService {
 
     Guider findGuiderByGuidernameAndPassword(String guidername, String password);
 
+    String getNameById(Integer id);
 
 
     void add(Guider Guider);

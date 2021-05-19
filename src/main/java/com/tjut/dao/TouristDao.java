@@ -13,6 +13,7 @@ public interface TouristDao {
     void delete(Integer id);
     Tourist findById(Integer id);
     Tourist findByIdSecond(String id);
+    String getNameById(Integer id);
 
     void update(Tourist tourist);
 }

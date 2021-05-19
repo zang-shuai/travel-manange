@@ -19,6 +19,7 @@ public interface UserService {
 
 
     User login(User user);
+    String getNameById(Integer id);
 
 
     void addUser(User user);

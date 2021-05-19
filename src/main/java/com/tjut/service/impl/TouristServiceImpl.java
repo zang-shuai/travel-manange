@@ -27,6 +27,11 @@ public class TouristServiceImpl implements TouristService {
     }
 
     @Override
+    public String getNameById(Integer id) {
+        return dao.getNameById(id);
+    }
+
+    @Override
     public Tourist login(Tourist tourist) {
         return null;
     }

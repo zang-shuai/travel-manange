@@ -7,9 +7,22 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TouristDaoImpl implements TouristDao {
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+
+    @Override
+    public String getNameById(Integer id) {
+        String sql = "select tname  from tourist where tid=?";
+        String s;
+        try {
+            s = Objects.requireNonNull(template.queryForObject(sql, new BeanPropertyRowMapper<>(Tourist.class), id)).getTName();
+        } catch (Exception e) {
+            return null;
+        }
+        return s;
+    }
 
     @Override
     public List<Tourist> findAll() {
@@ -21,7 +34,7 @@ public class TouristDaoImpl implements TouristDao {
     @Override
     public void add(Tourist tourist) {
         String sql = "insert into tourist values (null,?,?,?,?)";
-        template.update(sql, tourist.getTName(), tourist.getTIntroduce(), tourist.getTPrice(),tourist.getTIdSecond());
+        template.update(sql, tourist.getTName(), tourist.getTIntroduce(), tourist.getTPrice(), tourist.getTIdSecond());
 
     }
 
@@ -48,6 +61,6 @@ public class TouristDaoImpl implements TouristDao {
     @Override
     public void update(Tourist tourist) {
         String sql = "update tourist set tname=?,tintroduce=?,tprice=?";
-        template.update(sql,tourist.getTName(),tourist.getTIntroduce(),tourist.getTPrice());
+        template.update(sql, tourist.getTName(), tourist.getTIntroduce(), tourist.getTPrice());
     }
 }
