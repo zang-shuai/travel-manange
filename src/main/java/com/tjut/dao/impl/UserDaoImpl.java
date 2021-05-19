@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UserDaoImpl implements UserDao {
 
@@ -33,6 +34,18 @@ public class UserDaoImpl implements UserDao {
     public void add(User user) {
         String sql = "insert into user values (null,?,?,?,?,?,?)";
         template.update(sql, user.getUName(), user.getUAge(), user.getUTelephonenumber(), user.getUPassword(), user.getUHead(), user.getUPower());
+    }
+
+    @Override
+    public String getNameById(Integer id) {
+        String sql = "select uname  from user where uid=?";
+        String s;
+        try {
+            s= Objects.requireNonNull(template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id)).getUName();
+        } catch (Exception e) {
+            return null;
+        }
+        return s;
     }
 
     @Override

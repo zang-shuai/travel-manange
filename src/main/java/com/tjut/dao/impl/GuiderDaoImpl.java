@@ -7,11 +7,20 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GuiderDaoImpl implements GuiderDao {
 
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
-
+    @Override
+    public String getNameById(Integer id) {
+        String sql = "select gname  from guider where gid=?";
+        try {
+            return Objects.requireNonNull(template.queryForObject(sql, new BeanPropertyRowMapper<>(Guider.class), id)).getGName();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     @Override
     public List<Guider> findAll() {
         //使用JDBC操作数据库...
@@ -55,7 +64,7 @@ public class GuiderDaoImpl implements GuiderDao {
     }
 
     @Override
-    public Guider findById(String gid) {
+    public Guider findById(Integer gid) {
         String sql = "select *from guider where gid=?";
         Guider guider;
         try {

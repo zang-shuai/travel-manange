@@ -6,7 +6,16 @@ public class Comment implements Serializable {
     private Integer CId;
     private Integer UId;
     private Integer PId;
+    private Integer CType;
     private String Content;
+
+    public Integer getCType() {
+        return CType;
+    }
+
+    public void setCType(Integer CType) {
+        this.CType = CType;
+    }
 
     @Override
     public String toString() {
@@ -14,6 +23,7 @@ public class Comment implements Serializable {
                 "CId=" + CId +
                 ", UId=" + UId +
                 ", PId=" + PId +
+                ", CType=" + CType +
                 ", Content='" + Content + '\'' +
                 '}';
     }

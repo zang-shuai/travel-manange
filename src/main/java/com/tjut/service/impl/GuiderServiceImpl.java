@@ -21,6 +21,11 @@ public class GuiderServiceImpl implements GuiderService {
     }
 
     @Override
+    public String getNameById(Integer id) {
+        return guiderDao.getNameById(id);
+    }
+
+    @Override
     public void add(Guider guider) {
         guiderDao.add(guider);
     }
@@ -36,8 +41,8 @@ public class GuiderServiceImpl implements GuiderService {
     }
 
     @Override
-    public Guider findById(String cid) {
-        return null;
+    public Guider findById(Integer id) {
+        return guiderDao.findById(id);
     }
 
     @Override

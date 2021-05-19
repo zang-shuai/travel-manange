@@ -16,6 +16,14 @@
                 </label><br>
             </div>
 
+    <label>
+        价格：
+        <input name="pprice" type="number" required>
+    </label><br>
+    <label>
+        最大游客数：
+        <input id="pmaxcount" name="pmaxcount" type="number" required>
+    </label><br>
             <label>
                 价格：
                 <input name="pprice" type="number">
@@ -26,35 +34,28 @@
             </label><br>
 
 
-            <label>
-                开始日期：
-                <input id="startTime" name="pstartdate" type="date">
-            </label>
-            <label>
-                结束日期：
-                <input id="endTime" name="penddate" type="date">
-            </label><br>
-            <div>
-                可供选择的导游：
-                <div id="guidertime"></div>
-            </div>
-
-
-            <!--    <div id="guidertime"></div>-->
-
-
-            点击查看导游：
-            <div id="guider"></div>
-            <input type="submit">
-        </form>
+    <label>
+        开始日期：
+        <input id="startTime" name="pstartdate" type="date" required>
+    </label>
+    <label>
+        结束日期：
+        <input id="endTime" name="penddate" type="date" required>
+    </label><br>
+    <div>
+        可供选择的导游：
+        <div id="guidertime"></div>
+    </div>
+    <div id="guider"></div>
+    <input id="submit" type="submit">
+    </form>
     </div>
 </div>
-
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("guiderform").setAttribute("action", pa + "/addGuiderServlet");
-
+    document.getElementById("guiderform").setAttribute("action", pa + "/addPlanServlet");
+    let count = 0
 
     function addDate(date, days) {
         var d = new Date(date);
@@ -121,7 +122,8 @@
                 let span = document.createElement("span")
                 htmlDivElement.type = "radio"
                 htmlDivElement.name = "guider"
-                htmlDivElement.value = gname
+                htmlDivElement.value = arrElement["g"]["gid"];
+                htmlDivElement.required = true
                 span.innerHTML = gname
                 guidertime.appendChild(htmlDivElement)
                 guidertime.appendChild(span)
@@ -137,8 +139,6 @@
                 htmltrElement1.appendChild(htmltdElementstart1)
                 htmltrElement1.appendChild(htmltdElementend1)
                 guidertimetable.appendChild(htmltrElement1)
-
-
                 for (let worktime in worktimelist) {
                     let worktimestart = new Date(worktimelist[worktime]["start"]).format("yyyy-MM-dd");
                     let worktimeend = new Date(worktimelist[worktime]["end"]).format("yyyy-MM-dd");
@@ -155,8 +155,6 @@
             }
         }
     }
-
-
 
     function disabledradio() {                           //取消radio的选择
         var x = document.getElementsByName("guider");  //获取所有name=brand的元素
@@ -210,7 +208,7 @@
             }
             if (guiderhastime) {
                 document.getElementById(guidername).disabled = false;
-            }else {
+            } else {
                 document.getElementById(guidername).disabled = true;
             }
         }
@@ -238,6 +236,19 @@
         }
     })
 
+    let pmaxcount = document.getElementById("pmaxcount");
+    pmaxcount.addEventListener("input", function (e) {
+        let inputs = document.getElementsByTagName("input");
+        let boxs = [];
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].type === "checkbox") {
+                boxs.push(inputs[i])
+                inputs[i].checked = false
+                count = 0
+            }
+        }
+    })
+
 
     //获取所有旅游景点
     var xmlhttp = new XMLHttpRequest();
@@ -253,8 +264,9 @@
                 let span = document.createElement("span")
                 input.type = "radio"
                 input.name = "tourist"
+                input.required = true
                 let arrElement = arr[obj]
-                input.value = arrElement["tname"]
+                input.value = arrElement["tid"]
                 span.innerHTML = arrElement["tname"]
                 tour.appendChild(input)
                 tour.appendChild(span)

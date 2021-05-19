@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--加一个-->
+<form id="insuranceform" method="post">
+    类型：<input name="sname" type="text"><br>
+    价格：<input name="sprice" type="number"><br>
+    <input type="submit">
+</form>
+
+<script>
+    const pathname = window.document.location.pathname;
+    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+    document.getElementById("insuranceform").setAttribute("action", pa + "/addInsuranceServlet");
+</script>
+</body>
+</html>

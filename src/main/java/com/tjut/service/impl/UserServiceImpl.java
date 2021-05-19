@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getNameById(Integer id) {
+        return dao.getNameById(id);
+    }
+
+    @Override
     public void addUser(User user) {
         dao.add(user);
     }

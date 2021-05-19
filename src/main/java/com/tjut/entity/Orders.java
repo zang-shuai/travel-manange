@@ -7,6 +7,7 @@ public class Orders implements Serializable {
     private Integer OId;
     private Integer PId;
     private Integer UId;
+    private Integer SId;
     private Date OBuyDate;
 
     @Override

@@ -10,6 +10,7 @@ public interface GuiderDao {
 
     Guider findGuiderByGuidernameAndPassword(String guidername, String password);
 
+    String getNameById(Integer id);
 
 
     void add(Guider Guider);
@@ -18,7 +19,7 @@ public interface GuiderDao {
 
     Guider findByTelephoneNumber(String parseInt);
 
-    Guider findById(String cid);
+    Guider findById(Integer id);
 
     void update(Guider Guider);
 }
