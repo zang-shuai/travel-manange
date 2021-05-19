@@ -36,19 +36,16 @@
         可供选择的导游：
         <div id="guidertime"></div>
     </div>
-
-
     选择交通工具：
-    <div id="warn"></div>
     <div id="vehicle"></div>
-
     <div id="guider"></div>
+    <input id="hiddenvehicle" type="hidden" name="vehicle"/>
     <input id="submit" type="submit" disabled>
 </form>
 <script>
     const pathname = window.document.location.pathname;
     const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("guiderform").setAttribute("action", pa + "/addGuiderServlet");
+    document.getElementById("guiderform").setAttribute("action", pa + "/addPlanServlet");
     let count = 0
 
     function addDate(date, days) {
@@ -116,7 +113,7 @@
                 let span = document.createElement("span")
                 htmlDivElement.type = "radio"
                 htmlDivElement.name = "guider"
-                htmlDivElement.value = gname
+                htmlDivElement.value = arrElement["g"]["gid"];
                 htmlDivElement.required = true
                 span.innerHTML = gname
                 guidertime.appendChild(htmlDivElement)
@@ -232,8 +229,8 @@
 
     let pmaxcount = document.getElementById("pmaxcount");
     pmaxcount.addEventListener("input", function (e) {
-        var inputs = document.getElementsByTagName("input");
-        var boxs = [];
+        let inputs = document.getElementsByTagName("input");
+        let boxs = [];
         for (let i = 0; i < inputs.length; i++) {
             if (inputs[i].type === "checkbox") {
                 boxs.push(inputs[i])
@@ -260,7 +257,7 @@
                 input.name = "tourist"
                 input.required = true
                 let arrElement = arr[obj]
-                input.value = arrElement["tid"] + "_" + arrElement["tname"]
+                input.value = arrElement["tid"]
                 span.innerHTML = arrElement["tname"]
                 tour.appendChild(input)
                 tour.appendChild(span)
@@ -286,7 +283,7 @@
                 let checkbox = document.createElement("input")
                 checkbox.type = "checkbox"
                 checkbox.id = arrElement['vid'] + arrElement["vtype"]
-                checkbox.name = arrElement['vid'] +"_"+ arrElement["vtype"]
+                checkbox.name = arrElement['vid']
                 checkbox.value = arrElement["vcapacity"]
 
                 checkbox.addEventListener("input", function (e) {
@@ -299,7 +296,6 @@
                         count -= parseInt(checkbox.value)
                         console.log("-", count)
                     }
-                    let submit = document.getElementById("submit");
                     let pmaxcount = document.getElementById("pmaxcount");
                     if ((pmaxcount.value != null) && parseInt(pmaxcount.value) <= count) {
                         if (precount >= parseInt(pmaxcount.value) && precount < count) {
@@ -311,12 +307,11 @@
                     }
                 })
 
-                // checkbox.addEventListener()
                 let htmlTableDataCellElement = document.createElement("td");
                 htmlTableDataCellElement.appendChild(checkbox)
                 tr.appendChild(htmlTableDataCellElement)
                 look.push(arrElement["vid"])
-                vehicleidlist.push(arrElement['vid'] +"_"+ arrElement["vtype"])
+                vehicleidlist.push(arrElement['vid'])
                 look.push(arrElement["vtype"])
                 look.push(arrElement["vcapacity"])
                 for (let x in look) {
@@ -328,7 +323,19 @@
             }
         }
     }
+    let submitBtn = document.getElementById("submit");
 
+    submitBtn.onclick = function (event) {
+        let inputs = document.getElementsByTagName("input");
+        let boxs = "";
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].type === "checkbox"&&inputs[i].checked === true) {
+                boxs=boxs+inputs[i].name+"-"
+            }
+        }
+        document.getElementById("hiddenvehicle").value=boxs
+        return true;
+    };
 
 </script>
 </body>
