@@ -3,37 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/formaction.js"></script>
+    <style>
+        div {
+            border: 1px solid black;
+        }
+
+        #main1, #main3 {
+            height: 500px;
+            display: flex;
+        }
+    </style>
+    <script src="js/cookie.js"></script>
 </head>
 <body>
+<div id="div1"></div>
+<div id="main">
+    <div id="main1">
+        <div id="main1_1" style="flex:1;"></div>
+        <div id="main1_2" style="flex:1;">
+            <div id="divtintroduce"></div>
+            <div id="divguidergname"></div>
+            <div id="divguidergintroduce"></div>
+            <div id="divpstartDate"></div>
+            <div id="divpendDate"></div>
+            <div id="divpprice"></div>
+            <div id="divinsurance"></div>
+            <button id="btn" type="button">点击购买</button>
+        </div>
+    </div>
+    <div id="main2">
 
-
-
-
+    </div>
+    <div id="main3">
+        <div id="main3_1" style="flex:1;"></div>
+        <div id="main3_2" style="flex:1;"></div>
+    </div>
+</div>
 
 
 <script>
+
+
+    function purchaseOrder() {
+        if (getCookie("user") === null) {
+            alert("请先登录")
+        } else {
+            let select = "&insurance=-1"
+            let inputs = document.getElementsByName("insurance");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) {
+                    select = "&insurance=" + inputs[i].value
+                }
+            }
+
+            const pathname = window.document.location.pathname;
+            const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+            window.location.href = pa+ "/buyOneServlet" + window.location.search + "&uid=" + getCookie("uid") + select
+        }
+    }
+
+
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "purchaseOrderServlet"+window.location.search, true);
+    xmlhttp.open("POST", "purchaseOrderServlet" + window.location.search, true);
     xmlhttp.send();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             //获取服务器的响应结果
             let responseText = xmlhttp.responseText;
-            let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
-            for (let obj in arr) {
-                let look = []
-                let tr = document.createElement("tr")
-                let arrElement = arr[obj];
-                look.push(arrElement["vid"])
-                look.push(arrElement["vtype"])
-                look.push(arrElement["vcapacity"])
-                for (let x in look) {
-                    let td = document.createElement("td")
-                    td.innerHTML = look[x]
-                    tr.appendChild(td)
+            let plan = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+
+
+            let tintroduce = plan["tourist"]["tintroduce"];
+
+            let touristtouristImglist = plan["tourist"]["touristImg"];
+
+            let guidergname = plan["guider"]["gname"];
+            let guiderghead = plan["guider"]["ghead"];
+            let guidergintroduce = plan["guider"]["gintroduce"];
+            let pstartDate = plan["pstartDate"];
+            let pendDate = plan["pendDate"];
+            let pprice = plan["pprice"];
+
+            let main1_1 = document.getElementById("main1_1");
+            let main1_2 = document.getElementById("main1_2");
+            let img = document.createElement("img");
+            img.src = guiderghead
+            main1_1.appendChild(img)
+
+            document.getElementById("divtintroduce").innerHTML = tintroduce
+            document.getElementById("divguidergname").innerHTML = guidergname
+            document.getElementById("divguidergintroduce").innerHTML = guidergintroduce
+            document.getElementById("divpstartDate").innerHTML = pstartDate
+            document.getElementById("divpendDate").innerHTML = pendDate
+            document.getElementById("divpprice").innerHTML = pprice
+
+            let divinsurance = document.getElementById("divinsurance");
+            //获取所有旅游景点
+            var xmlhttp2 = new XMLHttpRequest();
+            xmlhttp2.open("POST", "findAllInsuranceServlet", true);
+            xmlhttp2.send();
+            xmlhttp2.onreadystatechange = function () {
+                if (xmlhttp2.readyState === 4 && xmlhttp2.status === 200) {
+                    let divinsurance = document.getElementById("divinsurance");
+                    let responseText = xmlhttp2.responseText
+                    let arr = JSON.parse(responseText);
+                    for (let obj in arr) {
+                        let input = document.createElement("input")
+                        let span = document.createElement("span")
+                        input.type = "radio"
+                        input.name = "insurance"
+                        input.required = true
+                        let arrElement = arr[obj]
+                        console.log(arrElement)
+                        input.value = arrElement["sid"]
+                        span.innerHTML = arrElement["sname"] + ":" + arrElement["sprice"] + "元"
+                        divinsurance.appendChild(input)
+                        divinsurance.appendChild(span)
+                    }
                 }
-                document.getElementById("vehicletable").appendChild(tr);
             }
+
+
+            let btn = document.getElementById("btn");
+            btn.onclick = function () {
+                let b = confirm("你确定要购买吗？");
+                if (b) {
+                    purchaseOrder()
+                }
+            }
+            // main1_2.appendChild(button)
+
+            //写入图片
+            let main2 = document.getElementById("main2");
+            for (let touristimg in touristtouristImglist) {
+                let touristtouristImglistElement = touristtouristImglist[touristimg];
+                let taddress = touristtouristImglistElement["taddress"];
+                let img = document.createElement("img");
+                img.width = 430
+                img.height = 280
+                img.src = taddress
+                main2.appendChild(img)
+            }
+
+
+            //获取评论
+
+
         }
     }
 </script>

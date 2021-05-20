@@ -22,24 +22,15 @@ public class PurchaseOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        String pid = request.getParameter("pid");
+        Integer pid = Integer.valueOf(request.getParameter("pid"));
         System.out.println(pid);
 
 
 
         PlanService planService=new PlanServiceImpl();
-        GuiderService guiderService=new GuiderServiceImpl();
-        Plan byPId = planService.findByPId(Integer.valueOf(pid));
-        Guider byId = guiderService.findById(byPId.getGId());
-        System.out.println(byPId);
-
-        Purchase purchase = new Purchase();
-        purchase.setPlan(byPId);
-        purchase.setGuider(byId);
-//        purchase.setComments();
-
+        Plan p = planService.findByPId(pid);
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(byPId);
+        String json = mapper.writeValueAsString(p);
         response.getWriter().write(json);
     }
 

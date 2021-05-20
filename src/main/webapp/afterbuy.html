@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>购买<span id="bool"></span></h1>
+<h2 id="why"></h2>
+
+
+<div id="box">
+    <p>页面在
+        <span id="Os">5</span>
+        s后跳转
+    </p>
+</div>
+<script>
+    function GetUrlParam(paraName) {
+        let url = document.location.toString();
+        let arrObj = url.split("?");
+        if (arrObj.length > 1) {
+            let arrPara = arrObj[1].split("&");
+            let arr;
+            for (let i = 0; i < arrPara.length; i++) {
+                arr = arrPara[i].split("=");
+                if (arr != null && arr[0] === paraName) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+        else {
+            return "";
+        }
+    }
+    let Os=document.getElementById("Os");
+    let num=5;
+    let timer=setInterval(function () {
+        num--;
+        Os.innerText=num;
+        if(num===0){
+            window.location.href="index.html";
+        }
+    },1000)
+
+
+    let rel = parseInt(GetUrlParam("rel"));
+    if(rel===1){
+        document.getElementById("bool").innerHTML="失败"
+        document.getElementById("why").innerHTML="抱歉，已经满员了，建议交换"
+    }else if(rel===2){
+        document.getElementById("bool").innerHTML="失败"
+        document.getElementById("why").innerHTML="该时间段内你还有其他旅游计划"
+    }else{
+        document.getElementById("bool").innerHTML="成功"
+        document.getElementById("why").innerHTML="购买该计划成功"
+    }
+
+
+</script>
+
+</body>
+</html>

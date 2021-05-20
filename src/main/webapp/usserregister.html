@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/formaction.js"></script>
 </head>
 <body>
 <link rel="stylesheet" href="styles/userregister.css">
@@ -65,9 +66,7 @@
 </div>
 
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("userform").setAttribute("action",pa+"/userRegisterServlet");
+    setaction("userform","userRegisterServlet")
 </script>
 </body>
 </html>

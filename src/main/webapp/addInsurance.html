@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/formaction.js"></script>
 </head>
 <body>
 <!--加一个-->
@@ -13,9 +14,7 @@
 </form>
 
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("insuranceform").setAttribute("action", pa + "/addInsuranceServlet");
+    setaction("insuranceform","addInsuranceServlet")
 </script>
 </body>
 </html>

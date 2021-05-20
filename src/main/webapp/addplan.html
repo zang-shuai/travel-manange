@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/date.js"></script>
+    <script src="js/formaction.js"></script>
 
 </head>
 <body>
@@ -40,46 +42,9 @@
     <input id="submit" type="submit">
 </form>
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("guiderform").setAttribute("action", pa + "/addPlanServlet");
+    setaction("guiderform","addPlanServlet")
     let count = 0
 
-    function addDate(date, days) {
-        var d = new Date(date);
-        d.setDate(d.getDate() + days);
-        var m = d.getMonth() + 1;
-        if (m.toString().length === 1) {
-            m = '0' + m
-        }
-        let da = d.getDate();
-        if (da.toString().length === 1) {
-            da = '0' + da
-        }
-        return d.getFullYear() + '-' + m + '-' + da;
-    }
-
-    Date.prototype.format = function (fmt) {
-        var o = {
-            "M+": this.getMonth() + 1,                 //月份
-            "d+": this.getDate(),                    //日
-            "h+": this.getHours(),                   //小时
-            "m+": this.getMinutes(),                 //分
-            "s+": this.getSeconds(),                 //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds()             //毫秒
-        };
-        if (/(y+)/.test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        }
-        for (var k in o) {
-            if (new RegExp("(" + k + ")").test(fmt)) {
-                fmt = fmt.replace(
-                    RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            }
-        }
-        return fmt;
-    }
     let date = new Date().format("yyyy-MM-dd");
     let begin = addDate(date, 1)
     let end = addDate(date, 30)
@@ -92,7 +57,6 @@
     let arr = undefined;
     let gname = undefined;
     let xmlhttp1 = new XMLHttpRequest();
-    // xmlhttp1.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
     xmlhttp1.open("POST", "findFreeGuiderServlet", true);
     xmlhttp1.send();
     xmlhttp1.onreadystatechange = function () {

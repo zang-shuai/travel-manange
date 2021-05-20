@@ -3,22 +3,30 @@ package com.tjut.entity;
 import java.util.Date;
 
 public class WorkTime {
-    private Date start;
-    private Date end;
+    private Date pstartdate;
+    private Date penddate;
 
-    public Date getStart() {
-        return start;
+    @Override
+    public String toString() {
+        return "WorkTime{" +
+                "pstartdate=" + pstartdate +
+                ", penddate=" + penddate +
+                '}';
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public Date getPstartdate() {
+        return pstartdate;
     }
 
-    public Date getEnd() {
-        return end;
+    public void setPstartdate(Date pstartdate) {
+        this.pstartdate = pstartdate;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public Date getPenddate() {
+        return penddate;
+    }
+
+    public void setPenddate(Date penddate) {
+        this.penddate = penddate;
     }
 }

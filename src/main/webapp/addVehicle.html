@@ -3,25 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/formaction.js"></script>
 </head>
 <body>
 <!--加一个-->
 <form id="vehicleform" method="post">
-<!--    <select name="vtype">-->
-<!--        <option value="volvo">Volvo</option>-->
-<!--        <option value="saab">Saab</option>-->
-<!--        <option value="mercedes">Mercedes</option>-->
-<!--        <option value="audi">Audi</option>-->
-<!--    </select>-->
     车牌：<input name="vtype" type="text"><br>
     容量：<input name="vcapacity" type="number"><br>
     <input type="submit">
 </form>
 
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("vehicleform").setAttribute("action", pa + "/addVehicleServlet");
+    setaction("vehicleform","addVehicleServlet")
 </script>
 </body>
 </html>

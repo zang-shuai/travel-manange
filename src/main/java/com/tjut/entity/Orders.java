@@ -14,10 +14,19 @@ public class Orders implements Serializable {
     public String toString() {
         return "Orders{" +
                 "OId=" + OId +
-                ", PId='" + PId + '\'' +
+                ", PId=" + PId +
                 ", UId=" + UId +
+                ", SId=" + SId +
                 ", OBuyDate=" + OBuyDate +
                 '}';
+    }
+
+    public Integer getSId() {
+        return SId;
+    }
+
+    public void setSId(Integer SId) {
+        this.SId = SId;
     }
 
     public Integer getOId() {

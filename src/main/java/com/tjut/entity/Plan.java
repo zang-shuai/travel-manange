@@ -16,6 +16,15 @@ public class Plan implements Serializable {
     private Integer PMaxCount;
     private Integer PCount;
     private Tourist tourist;
+    private Guider guider;
+
+    public Guider getGuider() {
+        return guider;
+    }
+
+    public void setGuider(Guider guider) {
+        this.guider = guider;
+    }
 
     @Override
     public String toString() {
@@ -31,6 +40,7 @@ public class Plan implements Serializable {
                 ", PMaxCount=" + PMaxCount +
                 ", PCount=" + PCount +
                 ", tourist=" + tourist +
+                ", guider=" + guider +
                 '}';
     }
 

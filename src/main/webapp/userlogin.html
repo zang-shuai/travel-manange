@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login/Sign Up</title>
+    <script src="js/formaction.js"></script>
 </head>
 <!--  Styles  -->
 <link rel="stylesheet" href="styles/userlogin.css">
@@ -21,9 +22,7 @@
 </div>
 
 <script >
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("loginform").setAttribute("action", pa + "/userLoginServlet");
+    setaction("loginform","userLoginServlet")
 </script>
 </body>
 </html>
