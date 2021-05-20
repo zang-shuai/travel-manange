@@ -34,9 +34,8 @@ public class FindAllPlanServlet extends HttpServlet {
         TouristService touristService=new TouristServiceImpl();
 
         List<Plan> all = planService.findAll();
+        System.out.println(all);
         for(Plan p:all){
-//            System.out.println(p.getGId()+"--"+guiderService.getNameById(p.getGId()));
-//            System.out.println(p.getTId());
             p.setGName(guiderService.getNameById(p.getGId()));
             p.setTName(touristService.getNameById(p.getTId()));
         }

@@ -109,6 +109,7 @@
                 //获取服务器的响应结果
                 let responseText = xmlhttp.responseText;
                 let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+                console.log(arr)
                 for (let obj in arr) {
                     let look = []
                     let tr = document.createElement("div")
@@ -135,8 +136,7 @@
                     a.href = pa + "/purchase.html" + "?" + "pid=" + arrElement["pid"]
                     a.innerHTML = "查看详情"
                     let img = document.createElement("img");
-                    console.log(arrElement)
-                    img.src=arrElement["tourist"]["tourist"]["touristImg"]
+                    img.src=arrElement["tourist"]["touristImg"][0]["taddress"]
                     // img.width="100%"
                     // img.height="100%"
                     // img.style="float:left"

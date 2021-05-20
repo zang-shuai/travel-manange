@@ -10,18 +10,20 @@ import com.tjut.dao.impl.TouristDaoImpl;
 import com.tjut.dao.impl.TouristImgDaoImpl;
 import com.tjut.entity.*;
 import com.tjut.service.PlanService;
+import com.tjut.service.TouristService;
 
 import java.util.*;
 
 public class PlanServiceImpl implements PlanService {
     private final PlanDao planDao = new PlanDaoImpl();
-    private final TouristDao touristDao = new TouristDaoImpl();
+    private final TouristService touristService = new TouristServiceImpl();
 
     @Override
     public List<Plan> findAll() {
         List<Plan> all = planDao.findAll();
         for (Plan p : all) {
-            Tourist t = touristDao.findById(p.getTId());
+//            Tourist t = touristService.findByTId(p.getTId());
+            Tourist t = touristService.findTouristById(p.getTId());
             p.setTourist(t);
         }
         return all;
@@ -40,7 +42,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Plan findByPId(Integer pid) {
         Plan byPId = planDao.findByPId(pid);
-        Tourist t = touristDao.findById(byPId.getTId());
+        Tourist t = touristService.findTouristById(byPId.getTId());
         byPId.setTourist(t);
         return byPId;
     }

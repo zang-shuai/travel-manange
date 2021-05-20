@@ -12,7 +12,7 @@ public class TouristImgServiceImpl implements TouristImgService {
 
     @Override
     public List<TouristImg> findByTId(Integer tid) {
-        return null;
+        return touristImgDao.findByTId(tid);
     }
 
     @Override
@@ -22,7 +22,8 @@ public class TouristImgServiceImpl implements TouristImgService {
 
     @Override
     public TouristImg findById(Integer iid) {
-        return null;
+        return touristImgDao.findById(iid);
+//        return null;
     }
 
     @Override
