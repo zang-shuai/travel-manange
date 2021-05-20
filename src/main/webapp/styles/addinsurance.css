@@ -4,12 +4,12 @@
 /*Styling the body & background*/
 body {
     height: 100vh;
-    background: url("images/gugong.jpg") center;
+    background: url("images/gugong.jpg") no-repeat center;
     background-size: cover;
 }
 /*The Login page*/
 .login-page {
-    padding: 3% 0 0;
+    padding: 6% 0 0;
     width: 600px;
     margin: auto;
 }
@@ -30,8 +30,8 @@ body {
     outline: 1em;
     border: 3px solid navajowhite;
     font-family: Baskerville;
-    margin: 0 0 15px;
-    padding: 3px;
+    margin: 0 0 35px;
+    padding: 15px;
     box-sizing: border-box;
     font-size: 1em;
     width: 100%;
@@ -55,14 +55,14 @@ body {
     transition: 0.4s all ease-in;
 }
 
-/*.buttonload {*/
-/*    background-color: white;*/
-/*    border: none;*/
-/*    color: white;*/
-/*    padding: 12px 16px;*/
-/*    font-size: 16px;*/
-/*    display: none;*/
-/*}*/
+.buttonload {
+    background-color: rgba(252, 189, 30, 0.85);
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    display: none;
+}
 
 /*For the paragraphs*/
 .form p {
@@ -139,7 +139,6 @@ body {
 }
 /*The form's links*/
 .form a {
-    /*position: center;*/
     text-decoration: none;
     color: black;
 }
