@@ -8,11 +8,11 @@ import com.tjut.service.CommentService;
 import java.util.List;
 
 public class CommentServiceImpl implements CommentService {
-    private CommentDao commentDao = new CommentDaoImpl();
+    private final CommentDao commentDao = new CommentDaoImpl();
 
     @Override
     public void add(Comment comment) {
-
+        commentDao.add(comment);
     }
 
     @Override

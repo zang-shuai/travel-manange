@@ -25,7 +25,6 @@ public class BuyOneServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        System.out.println("1++++++++++++++++++++++++++++++++++++++++++++");
 
         int rel = 0;
         OrdersService ordersService = new OrdersServiceImpl();
@@ -60,9 +59,6 @@ public class BuyOneServlet extends HttpServlet {
         Date today = new Date();
 //        如果这个日期在Date参数之前返回一个小于0的值 ;  如果这个日期在Date参数之后返回一个大于0的值
         List<WorkTime> usersTime = ordersService.findUsersTime(uid);
-        System.out.println("2++++++++++++++++++++++++++++++++++++++++++++");
-
-
 
         if (usersTime.size() == 0) {
             flag = true;
@@ -80,8 +76,6 @@ public class BuyOneServlet extends HttpServlet {
                 }
             }
         }
-        System.out.println("3++++++++++++++++++++++++++++++++++++++++++++");
-
 
         Integer pCount = plan.getPCount();
         if (pCount > plan.getPMaxCount()) {
@@ -101,12 +95,7 @@ public class BuyOneServlet extends HttpServlet {
             ordersService.add(orders);
             System.out.println(orders);
         }
-//        request.getRequestDispatcher("afterbuy.html"+"&rel="+rel).forward(request, response);
-//        request.getDispatcherHeader(B.jsp").forward(request,response);
         response.sendRedirect("afterbuy.html"+"?rel="+rel);
-//        System.out.println("可以执行重定向代码");
-//        response.sendRedirect("afterbuy.html");
-//        response.sendRedirect("index.html");
 
     }
 

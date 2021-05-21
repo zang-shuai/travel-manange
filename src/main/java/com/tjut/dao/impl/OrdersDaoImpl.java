@@ -27,7 +27,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
     @Override
     public List<Orders> findByUId(Integer uid) {
-        String sql = "select * from orders where oid=?";
+        String sql = "select * from orders where uid=?";
         return template.query(sql, new BeanPropertyRowMapper<>(Orders.class), uid);
     }
 

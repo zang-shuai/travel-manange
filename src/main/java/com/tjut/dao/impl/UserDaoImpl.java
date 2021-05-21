@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(Integer id) {
         String sql = "select *from user where uid=?";
         User user;
         try {

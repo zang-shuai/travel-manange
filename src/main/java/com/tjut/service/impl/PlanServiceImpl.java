@@ -95,6 +95,11 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Integer plusOne(Integer pid) {
-        return null;
+        return planDao.plusOne(pid);
+    }
+
+    @Override
+    public Integer minusOne(Integer pid) {
+        return planDao.minusOne(pid);
     }
 }

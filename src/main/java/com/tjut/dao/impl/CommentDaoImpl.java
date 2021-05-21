@@ -16,8 +16,8 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public void add(Comment comment) {
-        String sql = "insert into comment values (null,?,?,?)";
-        template.update(sql,comment.getUId(),comment.getPId(),comment.getContent());
+        String sql = "insert into comment values (null,?,?,?,?)";
+        template.update(sql,comment.getUId(),comment.getPId(),comment.getContent(),comment.getCType());
 
     }
 

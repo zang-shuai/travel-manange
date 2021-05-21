@@ -9,6 +9,8 @@ public class Orders implements Serializable {
     private Integer UId;
     private Integer SId;
     private Date OBuyDate;
+    private Plan plan;
+    private Insurance insurance;
 
     @Override
     public String toString() {
@@ -18,7 +20,25 @@ public class Orders implements Serializable {
                 ", UId=" + UId +
                 ", SId=" + SId +
                 ", OBuyDate=" + OBuyDate +
+                ", plan=" + plan +
+                ", insurance=" + insurance +
                 '}';
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 
     public Integer getSId() {

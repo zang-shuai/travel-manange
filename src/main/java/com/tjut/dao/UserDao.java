@@ -23,7 +23,7 @@ public interface UserDao {
 
     User findByTelephoneNumber(String parseInt);
 
-    User findById(String id);
+    User findById(Integer id);
 
     void update(User user);
 }

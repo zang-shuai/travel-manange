@@ -55,12 +55,18 @@ public class PlanDaoImpl implements PlanDao {
     @Override
     public void update(Plan plan) {
         String sql = "update plan set tid = ?,pstartdate = ? ,penddate = ? , gid = ? ,pprice = ?,pmaxcount=?,pcount=? where pid = ?";
-        template.update(sql,plan.getTId(),plan.getPStartDate(),plan.getPEndDate(),plan.getPId(),plan.getPPrice(),plan.getPMaxCount(),plan.getPCount(),plan.getPId());
+        template.update(sql, plan.getTId(), plan.getPStartDate(), plan.getPEndDate(), plan.getPId(), plan.getPPrice(), plan.getPMaxCount(), plan.getPCount(), plan.getPId());
     }
+
     @Override
     public Integer plusOne(Integer pid) {
+        String sql = "update plan set  pcount=pcount+1  where pid = ? and pmaxcount<pcount";
+        return template.update(sql, pid);
+    }
 
-        String sql = "update plan set  pcount=pcount+1  where pid = 1 and pmaxcount<pcount";
+    @Override
+    public Integer minusOne(Integer pid) {
+        String sql = "update plan set  pcount=pcount-1  where pid = ? and pcount>0";
         return template.update(sql, pid);
     }
 }

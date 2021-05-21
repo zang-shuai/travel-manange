@@ -57,7 +57,7 @@ public class TouristServiceImpl implements TouristService {
     public Tourist findTouristById(Integer id) {
         Tourist byId = dao.findById(id);
         List<TouristImg> byTId = touristImgDao.findByTId(byId.getTId());
-        System.out.println("图片：-------"+byTId);
+//        System.out.println("图片：-------"+byTId);
         byId.setTouristImg(byTId);
         return byId;
     }
