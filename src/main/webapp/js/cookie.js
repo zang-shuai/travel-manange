@@ -17,6 +17,6 @@ function getCookie(cookieName) {
 }
 function clearCookie(name) {
     setCookie(name, "", -1);
-    alert("你正要登出")
+    // alert("你正要登出")
     location.reload();
 }

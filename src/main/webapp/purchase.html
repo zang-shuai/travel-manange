@@ -15,6 +15,7 @@
         }
     </style>
     <script src="js/cookie.js"></script>
+    <script src="js/date.js"></script>
 </head>
 <body>
 <div id="div1"></div>
@@ -36,8 +37,12 @@
 
     </div>
     <div id="main3">
-        <div id="main3_1" style="flex:1;"></div>
-        <div id="main3_2" style="flex:1;"></div>
+        <div id="main3_1" style="flex:1;">
+            <h3>导游评价</h3>
+        </div>
+        <div id="main3_2" style="flex:1;">
+            <h3>景点评价</h3>
+        </div>
     </div>
 </div>
 
@@ -59,7 +64,7 @@
 
             const pathname = window.document.location.pathname;
             const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-            window.location.href = pa+ "/buyOneServlet" + window.location.search + "&uid=" + getCookie("uid") + select
+            window.location.href = pa + "/buyOneServlet" + window.location.search + "&uid=" + getCookie("uid") + select
         }
     }
 
@@ -73,7 +78,6 @@
             let responseText = xmlhttp.responseText;
             let plan = JSON.parse(responseText); //由JSON字符串转换为JSON对象
 
-
             let tintroduce = plan["tourist"]["tintroduce"];
 
             let touristtouristImglist = plan["tourist"]["touristImg"];
@@ -81,14 +85,16 @@
             let guidergname = plan["guider"]["gname"];
             let guiderghead = plan["guider"]["ghead"];
             let guidergintroduce = plan["guider"]["gintroduce"];
-            let pstartDate = plan["pstartDate"];
-            let pendDate = plan["pendDate"];
+            let pstartDate = new Date(plan["pstartDate"]).format("yyyy-MM-dd")
+            let pendDate = new Date(plan["pendDate"]).format("yyyy-MM-dd")
             let pprice = plan["pprice"];
 
             let main1_1 = document.getElementById("main1_1");
             let main1_2 = document.getElementById("main1_2");
             let img = document.createElement("img");
             img.src = guiderghead
+            img.height=400
+            img.width=400
             main1_1.appendChild(img)
 
             document.getElementById("divtintroduce").innerHTML = tintroduce
@@ -115,7 +121,7 @@
                         input.name = "insurance"
                         input.required = true
                         let arrElement = arr[obj]
-                        console.log(arrElement)
+                        // console.log(arrElement)
                         input.value = arrElement["sid"]
                         span.innerHTML = arrElement["sname"] + ":" + arrElement["sprice"] + "元"
                         divinsurance.appendChild(input)
@@ -124,7 +130,6 @@
                 }
             }
 
-
             let btn = document.getElementById("btn");
             btn.onclick = function () {
                 let b = confirm("你确定要购买吗？");
@@ -132,8 +137,6 @@
                     purchaseOrder()
                 }
             }
-            // main1_2.appendChild(button)
-
             //写入图片
             let main2 = document.getElementById("main2");
             for (let touristimg in touristtouristImglist) {
@@ -145,11 +148,65 @@
                 img.src = taddress
                 main2.appendChild(img)
             }
-
-
             //获取评论
+        }
+    }
 
+    var xmlhttp1 = new XMLHttpRequest();
+    xmlhttp1.open("POST", "getCommentServlet" + window.location.search, true);
+    xmlhttp1.send();
+    xmlhttp1.onreadystatechange = function () {
+        if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
+            let responseText = xmlhttp1.responseText;
+            console.log(responseText)
+            let comment = JSON.parse(responseText);
+            console.log(comment)
+            let main3_1 = document.getElementById("main3_1");
+            let main3_2 = document.getElementById("main3_2");
+            for (let i = 0; i < comment.length; i++) {
+                let ctype = parseInt(comment[i]["ctype"])
+                let content = comment[i]["content"]
+                let uhead = comment[i]["uhead"]
+                let uname = comment[i]["uname"]
+                let pid = comment[i]["pid"]
+                if (ctype === 1) {
+                    let divdiv = document.createElement("div");
+                    let divuhead = document.createElement("img");
+                    let divuname = document.createElement("span");
+                    let divpid = document.createElement("span");
+                    let divcontent = document.createElement("div");
 
+                    divuhead.src = uhead
+                    divuhead.width = 40
+                    divuhead.height = 40
+                    divuname.innerHTML = uname
+                    divcontent.innerHTML = content
+
+                    divdiv.appendChild(divuhead)
+                    divdiv.appendChild(divuname)
+                    divdiv.appendChild(divpid)
+                    divdiv.appendChild(divcontent)
+                    main3_1.appendChild(divdiv)
+                } else {
+                    let divdiv = document.createElement("div");
+                    let divuhead = document.createElement("img");
+                    let divuname = document.createElement("span");
+                    let divpid = document.createElement("span");
+                    let divcontent = document.createElement("div");
+
+                    divuhead.src = uhead
+                    divuhead.width = 40
+                    divuhead.height = 40
+                    divuname.innerHTML = uname
+                    divcontent.innerHTML = content
+
+                    divdiv.appendChild(divuhead)
+                    divdiv.appendChild(divuname)
+                    divdiv.appendChild(divpid)
+                    divdiv.appendChild(divcontent)
+                    main3_2.appendChild(divdiv)
+                }
+            }
         }
     }
 </script>

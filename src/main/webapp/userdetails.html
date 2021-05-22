@@ -29,7 +29,7 @@
                 <label for="utelephonenumber">电话号码：</label><input name="utelephonenumber" type="text"
                                                                   id="utelephonenumber"/><br>
                 <input hidden type="text" id="upassword"/><br>
-                <button id="btn" type="button">点击修改</button>
+<!--                <button id="btn" type="button">点击修改</button>-->
             </form>
         </div>
     </div>
@@ -76,7 +76,7 @@
                 let inputuage = document.getElementById("uage");
                 // let uhead = document.getElementById("uhead");
                 let inpututelephonenumber = document.getElementById("utelephonenumber");
-                let btn = document.getElementById("btn");
+                // let btn = document.getElementById("btn");
 
                 let uname = user["uname"];
                 let uage = user["uage"];
@@ -96,6 +96,8 @@
                 let img = document.createElement("img");
                 console.log(uhead)
                 img.src=uhead
+                img.width=400
+                img.height=400
                 // img.width=40
                 // img.height=40
                 main1_1.appendChild(img)

@@ -3,6 +3,7 @@ package com.tjut.dao;
 
 import com.tjut.entity.Comment;
 import com.tjut.entity.Guider;
+import com.tjut.entity.SelectComment;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface CommentDao {
     Comment findById(Integer cid);
     List<Comment> findByUId(Integer uid);
     List<Comment> findByPId(Integer pid);
+    List<SelectComment> findComments(Integer pid);
 }

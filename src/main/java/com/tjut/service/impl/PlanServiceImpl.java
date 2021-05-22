@@ -54,7 +54,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<Plan> findByGId(Integer gid) {
-        return null;
+        return planDao.findByGId(gid);
     }
 
     @Override

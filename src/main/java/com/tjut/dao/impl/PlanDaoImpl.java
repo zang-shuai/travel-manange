@@ -60,7 +60,7 @@ public class PlanDaoImpl implements PlanDao {
 
     @Override
     public Integer plusOne(Integer pid) {
-        String sql = "update plan set  pcount=pcount+1  where pid = ? and pmaxcount<pcount";
+        String sql = "update plan set  pcount=pcount+1  where pid = ? and pmaxcount>pcount";
         return template.update(sql, pid);
     }
 

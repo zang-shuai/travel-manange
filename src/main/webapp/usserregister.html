@@ -12,6 +12,7 @@
         <p>新用户注册</p>
         <p>USER REGISTER</p>
     </div>
+    <div id="div1" style="color:red"></div>
 
     <div class="lg_center">
 
@@ -61,12 +62,17 @@
 
     <div class="lg_right">
         <p>已有账号?</p>
-        <p><a href="http://localhost/WebD/home/home.php">立即登录</a></p>
+        <p><a href="userlogin.html">立即登录</a></p>
     </div>
 </div>
 
 <script>
     setaction("userform","userRegisterServlet")
+    let rel = GetUrlParam("rel");
+    if(rel==="0"){
+        let div1 = document.getElementById("div1");
+        div1.innerHTML="手机号码已被使用"
+    }
 </script>
 </body>
 </html>
