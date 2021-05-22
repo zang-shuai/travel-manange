@@ -15,7 +15,7 @@ public class UserLoginServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         UserService userService = new UserServiceImpl();
         User user = userService.findUserByTelephoneNumber(request.getParameter("utelephonenumber"));
-        if (user != null && user.getUPassword().equals(request.getParameter("upassword"))&&user.getUPower()==0) {
+        if (user != null && user.getUPassword().equals(request.getParameter("upassword"))&&user.getUPower()==1) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             Cookie cookie = new Cookie("user", user.getUName());
