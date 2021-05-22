@@ -34,43 +34,15 @@
         <h1>旅游信息管理系统</h1>
 
         <div class="flex-grid">
-            <div>
                 <h2>用户信息表</h2>
                 <table id="usertable" border="2px black solid">
                     <tr>
-                        <td>序号</td>
-                        <td>姓名</td>
-                        <td>年龄</td>
-                        <td>电话号码</td>
+                        <th>序号</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>电话号码</th>
                     </tr>
                 </table>
-            </div>
-<!--            <div>-->
-<!--                <h2>Font Awesome</h2>-->
-<!--                <ul>-->
-<!--                    <li>no images</li>-->
-<!--                    <li>no extra retina sprites</li>-->
-<!--                </ul>-->
-<!--            </div>-->
-
-<!--        </div>-->
-
-<!--        <div class="flex-grid">-->
-<!--            <div>-->
-<!--                <h2>Headline</h2>-->
-<!--                Some Content-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <h2>Headline</h2>-->
-<!--                Some Content-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="flex-grid">-->
-<!--            <div>-->
-<!--                <h2>Headline</h2>-->
-<!--                Some Content-->
-<!--            </div>-->
         </div>
 
     </main>
@@ -89,7 +61,9 @@
 
             for (let obj in arr) {
                 let look = []
+
                 let tr = document.createElement("tr")
+
                 let arrElement = arr[obj];
                 look.push(arrElement["uid"])
                 look.push(arrElement["uname"])

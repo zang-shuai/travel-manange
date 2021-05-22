@@ -17,12 +17,12 @@ public class GuiderLoginServlet extends HttpServlet {
         GuiderService guiderService =  new GuiderServiceImpl();
         Guider guider = guiderService.findByTelephoneNumber(request.getParameter("gtelephonenumber"));
         if (guider != null && guider.getGPassword().equals(request.getParameter("gpassword"))) {
-            HttpSession session = request.getSession();
-            session.setAttribute("guider", guider);
-            Cookie cookie = new Cookie("guider", guider.getGName());
-            cookie.setMaxAge(-1);
-            response.addCookie(cookie);
-            response.sendRedirect("guider.html");
+//            HttpSession session = request.getSession();
+//            session.setAttribute("guider", guider);
+//            Cookie cookie = new Cookie("guider", guider.getGName());
+//            cookie.setMaxAge(-1);
+//            response.addCookie(cookie);
+            response.sendRedirect("guider.html?gid="+guider.getGId());
         } else {
             System.out.println("cw");
             response.sendRedirect(request.getHeader("guider.html"));

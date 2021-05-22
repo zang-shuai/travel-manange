@@ -2,6 +2,7 @@ package com.tjut.dao.impl;
 
 import com.tjut.dao.OrdersDao;
 import com.tjut.entity.Orders;
+import com.tjut.entity.WorkTime;
 import com.tjut.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,8 +14,8 @@ public class OrdersDaoImpl implements OrdersDao {
 
     @Override
     public void add(Orders orders) {
-        String sql = "insert into orders values (null,?,?,?)";
-        template.update(sql, orders.getPId(), orders.getUId(), orders.getOBuyDate());
+        String sql = "insert into orders values (null,?,?,?,?)";
+        template.update(sql, orders.getPId(), orders.getUId(), orders.getSId(), orders.getOBuyDate());
     }
 
     @Override
@@ -26,7 +27,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
     @Override
     public List<Orders> findByUId(Integer uid) {
-        String sql = "select * from orders where oid=?";
+        String sql = "select * from orders where uid=?";
         return template.query(sql, new BeanPropertyRowMapper<>(Orders.class), uid);
     }
 
@@ -46,5 +47,11 @@ public class OrdersDaoImpl implements OrdersDao {
             return null;
         }
         return orders;
+    }
+
+    @Override
+    public List<WorkTime> findUsersTime(Integer uid) {
+        String sql = "select pstartdate,penddate from plan,orders where plan.pid=orders.pid and orders.uid=?  order by pstartdate";
+        return template.query(sql, new BeanPropertyRowMapper<>(WorkTime.class), uid);
     }
 }

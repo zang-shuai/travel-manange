@@ -15,12 +15,15 @@ public class UserLoginServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         UserService userService = new UserServiceImpl();
         User user = userService.findUserByTelephoneNumber(request.getParameter("utelephonenumber"));
-        if (user != null && user.getUPassword().equals(request.getParameter("upassword"))) {
+        if (user != null && user.getUPassword().equals(request.getParameter("upassword"))&&user.getUPower()==1) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             Cookie cookie = new Cookie("user", user.getUName());
             cookie.setMaxAge(-1);
             response.addCookie(cookie);
+            Cookie cookie1 = new Cookie("uid", user.getUId().toString());
+            cookie1.setMaxAge(-1);
+            response.addCookie(cookie1);
             response.sendRedirect("index.html");
         } else {
             response.sendRedirect(request.getHeader("Referer"));

@@ -21,7 +21,9 @@ public class TouristServiceImpl implements TouristService {
     public List<Tourist> findAll() {
         List<Tourist> all = dao.findAll();
         for (Tourist t : all) {
-            t.setTouristImg(touristImgDao.findByTId(t.getTId()));
+            List<TouristImg> byTId = touristImgDao.findByTId(t.getTId());
+            System.out.println(byTId);
+            t.setTouristImg(byTId);
         }
         return all;
     }
@@ -55,6 +57,7 @@ public class TouristServiceImpl implements TouristService {
     public Tourist findTouristById(Integer id) {
         Tourist byId = dao.findById(id);
         List<TouristImg> byTId = touristImgDao.findByTId(byId.getTId());
+//        System.out.println("图片：-------"+byTId);
         byId.setTouristImg(byTId);
         return byId;
     }

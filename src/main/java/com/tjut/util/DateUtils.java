@@ -20,4 +20,8 @@ public class DateUtils {
             return null;
         }
     }
+
+    public static boolean compareDate(Date small, Date big) {
+        return small.compareTo(big) < 0;
+    }
 }

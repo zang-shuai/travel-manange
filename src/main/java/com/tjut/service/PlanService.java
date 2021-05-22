@@ -29,4 +29,5 @@ public interface PlanService {
     void update(Plan plan);
 
     Integer plusOne(Integer pid);
+    Integer minusOne(Integer pid);
 }

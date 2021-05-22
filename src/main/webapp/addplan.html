@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<!--    <script src="js/date.js"></script>-->
+    <script src="js/formaction.js"></script>
+
     <title>addplan</title>
 </head>
 <link rel="stylesheet" href="styles/addplan.css">
@@ -54,24 +57,6 @@
     </div>
 </div>
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("guiderform").setAttribute("action", pa + "/addPlanServlet");
-    let count = 0
-
-    function addDate(date, days) {
-        var d = new Date(date);
-        d.setDate(d.getDate() + days);
-        var m = d.getMonth() + 1;
-        if (m.toString().length === 1) {
-            m = '0' + m
-        }
-        let da = d.getDate();
-        if (da.toString().length === 1) {
-            da = '0' + da
-        }
-        return d.getFullYear() + '-' + m + '-' + da;
-    }
 
     Date.prototype.format = function (fmt) {
         var o = {
@@ -94,6 +79,24 @@
         }
         return fmt;
     }
+    function addDate(date, days) {
+        var d = new Date(date);
+        d.setDate(d.getDate() + days);
+        var m = d.getMonth() + 1;
+        if (m.toString().length === 1) {
+            m = '0' + m
+        }
+        let da = d.getDate();
+        if (da.toString().length === 1) {
+            da = '0' + da
+        }
+        return d.getFullYear() + '-' + m + '-' + da;
+    }
+
+
+    setaction("guiderform","addPlanServlet")
+    let count = 0
+
     let date = new Date().format("yyyy-MM-dd");
     let begin = addDate(date, 1)
     let end = addDate(date, 30)
@@ -106,7 +109,6 @@
     let arr = undefined;
     let gname = undefined;
     let xmlhttp1 = new XMLHttpRequest();
-    // xmlhttp1.open("POST", "findFreeGuiderServlet?" + "startTime =" + startTime + "&endTime =" + endTime, true);
     xmlhttp1.open("POST", "findFreeGuiderServlet", true);
     xmlhttp1.send();
     xmlhttp1.onreadystatechange = function () {

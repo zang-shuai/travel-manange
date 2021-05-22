@@ -21,7 +21,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findUserByUsernameAndPassword(String UName, String UPassword) {
-
         String sql = "select * from user where UName=? and UPassword= ?";
         try {
             return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), UName, UPassword);
@@ -67,7 +66,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(Integer id) {
         String sql = "select *from user where uid=?";
         User user;
         try {

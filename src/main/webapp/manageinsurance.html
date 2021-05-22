@@ -36,11 +36,11 @@
 
         </div>
         <div class="flex-grid">
-            <table id="insurancetable" border="2px black solid">
+            <table id="insurancetable">
                 <tr>
-                    <td>序号</td>
-                    <td>类型</td>
-                    <td>价格</td>
+                    <th>序号</th>
+                    <th>类型</th>
+                    <th>价格</th>
                 </tr>
             </table>
         </div>
@@ -61,9 +61,9 @@
                 let look = []
                 let tr = document.createElement("tr")
                 let arrElement = arr[obj];
-                look.push(arrElement["vid"])
-                look.push(arrElement["vtype"])
-                look.push(arrElement["vcapacity"])
+                look.push(arrElement["sid"])
+                look.push(arrElement["sname"])
+                look.push(arrElement["sprice"])
                 for (let x in look) {
                     let td = document.createElement("td")
                     td.innerHTML = look[x]

@@ -3,16 +3,17 @@ package com.tjut.service.impl;
 import com.tjut.dao.CommentDao;
 import com.tjut.dao.impl.CommentDaoImpl;
 import com.tjut.entity.Comment;
+import com.tjut.entity.SelectComment;
 import com.tjut.service.CommentService;
 
 import java.util.List;
 
 public class CommentServiceImpl implements CommentService {
-    private CommentDao commentDao = new CommentDaoImpl();
+    private final CommentDao commentDao = new CommentDaoImpl();
 
     @Override
     public void add(Comment comment) {
-
+        commentDao.add(comment);
     }
 
     @Override
@@ -32,6 +33,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> findByPId(Integer pid) {
-        return null;
+        return commentDao.findByPId(pid);
+    }
+
+    @Override
+    public List<SelectComment> findComments(Integer pid) {
+        return commentDao.findComments(pid);
     }
 }

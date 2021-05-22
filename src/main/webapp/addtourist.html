@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="js/formaction.js"></script>
     <title>addtodolist</title>
 </head>
 <link rel="stylesheet" href="styles/add.css">
@@ -22,9 +23,7 @@
 </div>
 
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("addtouristform").setAttribute("action",pa+"/addTouristFormServlet");
+    setaction("addtouristform","addTouristFormServlet")
 </script>
 
 </body>

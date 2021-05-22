@@ -140,7 +140,7 @@ body {
 /*The form's links*/
 .form a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 /*Hovering effect over button*/
 .form button:hover,

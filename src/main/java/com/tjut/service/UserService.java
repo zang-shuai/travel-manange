@@ -17,16 +17,17 @@ public interface UserService {
      */
     List<User> findAll();
 
-
     User login(User user);
-    String getNameById(Integer id);
 
+    String getNameById(Integer id);
 
     void addUser(User user);
 
     void deleteUser(Integer id);
 
     User findUserByTelephoneNumber(String id);
+
+    User findById(Integer id);
 
     void updateUser(User user);
 

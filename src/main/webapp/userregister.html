@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="js/formaction.js"></script>
     <title>userregister</title>
 </head>
 <body>
@@ -13,6 +14,7 @@
         <p>新用户注册</p>
         <p>USER REGISTER</p>
     </div>
+    <div id="div1" style="color:red"></div>
 
     <div class="lg_center">
 
@@ -67,9 +69,12 @@
 </div>
 <footer class="last"></footer>
 <script>
-    const pathname = window.document.location.pathname;
-    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
-    document.getElementById("userform").setAttribute("action",pa+"/userRegisterServlet");
+    setaction("userform","userRegisterServlet")
+    let rel = GetUrlParam("rel");
+    if(rel==="0"){
+        let div1 = document.getElementById("div1");
+        div1.innerHTML="手机号码已被使用"
+    }
 </script>
 </body>
 </html>

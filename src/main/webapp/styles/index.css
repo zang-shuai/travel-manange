@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+::-webkit-input-placeholder {
+    color: #56585b;
+}
+
+::-moz-placeholder {
+    color: #56585b;
+}
+
+:-moz-placeholder {
+    color: #56585b;
+}
+
+.ion-plane:before {
+    content: "\f214";
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    /*background: url('') no-repeat center center fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+ul, nav{
+    list-style: none;
+    padding: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+a:hover {
+    opacity: 1;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: black;
+    margin: 0 0 1.5rem;
+}
+
+i {
+    font-size: 1.3rem;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: navajowhite;
+    padding: 10px 100px 0;
+}
+
+#head{
+    top: 0;
+    z-index: 1020;
+    background-color: #fff;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav li{
+    margin: 0 15px;
+}
+
+header nav li:first-child{
+    margin-left: 0;
+}
+
+header nav li:last-child{
+    margin-right: 0;
+}
+
+#plans{
+    padding-top: 80px;
+    width: 1200px;
+}
+
+
+.wrapper {
+    display: flex;
+    width: 500px;
+    height: 250px;
+}
+
+
+.flex-grid {
+    display: flex;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+}
+
+.flex-grid > div {
+    margin: 0 30px 30px 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+}
+
+.flex-grid img {
+    width: 300px;
+    height: 300px;
+}
+
+.flex-grid button {
+    margin: -15px -15px 15px -15px;
+    padding: 12px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom: 1px solid #ddd;
+}
+
+.flex-grid li {
+    position: relative;
+    margin: 0 0 10px;
+    padding: 0 0 0 25px;
+}
+
+.flex-grid li:before {
+    content: '\f00c';
+    font: normal 16px fontawesome;
+    top: 0;
+    left: 0;
+    color: #999;
+}
+
+/*
+** Media Queries
+***********************************************************/
+
+@media (max-width: 1000px) {
+
+    .flex-grid {
+        flex-direction: column;
+    }
+
+    .flex-grid > div {
+        margin-right: 0;
+    }
+
+}

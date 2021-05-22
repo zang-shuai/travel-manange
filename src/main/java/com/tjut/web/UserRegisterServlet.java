@@ -55,14 +55,16 @@ public class UserRegisterServlet extends HttpServlet {
                     case "upower" -> user.setUPower(Integer.parseInt(item.getString("utf-8")));
                 }
             }
-
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
         UserService userService = new UserServiceImpl();
-        userService.addUser(user);
-        response.sendRedirect("index.html");
-
+        try{
+            userService.addUser(user);
+            response.sendRedirect("index.html");
+        }catch (Exception e){
+            response.sendRedirect("usserregister.html?rel=0");
+        }
     }
 
     private void write(FileItem item, String fileName) throws IOException {
