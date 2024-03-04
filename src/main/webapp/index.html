@@ -9,9 +9,10 @@
 <link rel="stylesheet" href="styles/index.css">
 <body>
 <div class="wrapper">
+    <a id="namelink"><h1 id="name"></h1></a>
 
-    <header id="head" class="flex-grid">>
-        <a id="namelink"><h1 id="name"></h1></a>
+    <header id="head" class="flex-grid">
+<!--        <a id="namelink"><h1 id="name"></h1></a>-->
         <h2><a href="index.html"><i class="ion-plane"></i> Shuaier-Travel</a></h2>
         <nav>
             <ul>
@@ -97,11 +98,11 @@
                     } else {
                         continue
                     }
-                    look.push(arrElement["tname"])
-                    look.push(arrElement["gname"])
-                    look.push(pstartDate)
-                    look.push(pendDate)
-                    look.push(arrElement["pprice"])
+                    look.push("景点: "+arrElement["tname"])
+                    look.push("导游: "+arrElement["gname"])
+                    look.push("开始时间: "+pstartDate)
+                    look.push("结束时间: "+pendDate)
+                    look.push("价格: "+arrElement["pprice"])
                     for (let x in look) {
                         let td = document.createElement("div")
                         td.innerHTML = look[x]
