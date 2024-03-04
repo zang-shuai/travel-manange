@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:before, *:after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font: 15px/1 'Open Sans', sans-serif;
+    color: black;
+}
+
+a {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100%;
+}
+
+nav {
+    width: 200px;
+    background:black;
+}
+
+nav header {
+    position: relative;
+    height: 80px;
+    padding: 20px 0 0 15px;
+    font-size: 16px;
+    color: #fff;
+    background: orangered;
+}
+
+nav header span {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+    border: 1px solid #fff;
+}
+
+nav header span:before {
+    content: '\f007';
+    font: normal 20px fontawesome;
+    top: 7px;
+    left: 9px;
+}
+
+nav header a:before {
+    /*content: '\f08b';*/
+    font: normal 20px fontawesome;
+    top: 28px;
+    right: 15px;
+}
+
+nav ul span {
+    display: block;
+    padding: 15px;
+    color: rgba(252, 200, 20, 0.6);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(252, 189, 30, 0.85);
+}
+
+nav ul a {
+    position: relative;
+    display: block;
+    padding: 15px 15px 17px 50px;
+    color: #fff;
+    border-bottom: 1px solid navajowhite;
+}
+
+nav ul a:hover,
+nav ul a.active {
+    background:rgba(252, 189, 30, 0.85);
+}
+
+nav ul a:before {
+    font: normal 16px fontawesome;
+    top: 15px;
+    left: 18px;
+}
+
+nav ul li:nth-child(2) a:before { content: '\f00a'; }
+nav ul li:nth-child(3) a:before { content: '\f012'; }
+nav ul li:nth-child(4) a:before { content: '\f0c3'; }
+nav ul li:nth-child(5) a:before { content: '\f024'; }
+nav ul li:nth-child(6) a:before { content: '\f0fa'; }
+nav ul li:nth-child(7) a:before { content: '\f09b'; }
+nav ul li:nth-child(8) a:before { content: '\f08b'; }
+
+main {
+    flex: 1;
+    padding: 25px;
+    background: #f5f5f5;
+    /*flex-direction: column;*/
+}
+
+main h1 {
+    height: 80px;
+    margin: -25px -25px 25px -25px;
+    padding: 0 25px;
+    line-height: 76px;
+    font-size: 24px;
+    font-weight: 400;
+    background: yellow;
+}
+
+.flex-grid {
+    display: flex;
+    /*flex-direction: column;*/
+    flex: 2;
+    flex-wrap: nowrap;
+}
+
+.flex-grid > div{
+    margin: 0 20px 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+}
+
+.flex-grid > div:last-child {
+    margin-right: 0;
+}
+
+.flex-grid input {
+    margin: -15px -15px 15px -15px;
+    padding: 12px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom: 1px solid #ddd;
+}
+
+.flex-grid li {
+    position: relative;
+    margin: 0 0 10px;
+    padding: 0 0 0 25px;
+}
+
+.flex-grid li:before {
+    content: '\f00c';
+    font: normal 16px fontawesome;
+    top: 0;
+    left: 0;
+    color: #999;
+}
+
+/*
+** Media Queries
+***********************************************************/
+
+@media (max-width: 1000px) {
+
+    .flex-grid {
+        flex-direction: column;
+    }
+
+    .flex-grid > div {
+        margin-right: 0;
+    }
+
+}
+
+* {
+    box-sizing: border-box;
+}
+/*Styling the body & background*/
+body {
+    height: 100vh;
+    background: url("images/gugong.jpg") center;
+    background-size: cover;
+}
+/*The Login page*/
+.login-page {
+    padding: 3% 0 0;
+    max-width: 1000px;
+    margin: auto;
+}
+/*Styling the form*/
+.form {
+    z-index: 1;
+    position: relative;
+    margin: 0 auto 50px;
+    padding: 30px;
+    text-align: left;
+    background: rgba(252, 189, 30, 0.85);
+    border-radius: 7px;
+    max-width: 1000px;
+}
+/*Styling the input boxes*/
+.form input {
+    background: #f2f2f2;
+    outline: 1em;
+    border: 3px solid navajowhite;
+    font-family: Baskerville;
+    margin: 0 0 15px;
+    padding: 3px;
+    box-sizing: border-box;
+    font-size: 1em;
+    width: 100%;
+    border-radius: 0.2rem;
+}
+/*Customizing the reddish buttons for submitting the form.*/
+.form button {
+    /*font-family: monospace;*/
+    outline: 0;
+    color: black;
+    width: 100%;
+    border: 0;
+    font-size: 1em;
+    background-color: white;
+    padding: 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+    transition: 0.4s all ease-in;
+}
+
+/*.buttonload {*/
+/*    background-color: white;*/
+/*    border: none;*/
+/*    color: white;*/
+/*    padding: 12px 16px;*/
+/*    font-size: 16px;*/
+/*    display: none;*/
+/*}*/
+
+/*For the paragraphs*/
+.form p {
+    margin: 15px 0;
+    color: black;
+    text-align: center;
+
+}
+
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin: 15px 0;
+    cursor: pointer;
+    font-size: 1em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 3px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/*The form's links*/
+.form a {
+    /*position: center;*/
+    text-decoration: none;
+    color: black;
+}
+/*Hovering effect over button*/
+.form button:hover,
+.form button:active {
+    background: orangered;
+    position: relative;
+    top: 1px;
+}
+/*Hiding the registeration form until clicked*/
+.form .reg-form {
+    display: none;
+}
+
+/*Validating the input texts*/
+.reg-form input:valid,
+input:focus,
+input:invalid {
+    box-shadow: none;
+}
+
+.reg-form input:focus:valid,
+input:valid {
+    border: 3px solid navajowhite;
+}
+
+input:focus:invalid {
+    border: 2px solid red;
+}
+
+.last{
+    position: relative;
+    margin: 0 auto 50px;
+    text-align: left;
+    border-radius: 7px;
+    max-width: 270px;
+}
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    background-color: #f1f1f1;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    float: left;
+    padding: 16px;
+    text-decoration: none;
+    transition: background-color .8s;
+    border: 1px solid #ddd;
+}
+
+/*ul.pagination li a.active {*/
+/*    background-color: rgba(252, 189, 30, 0.85);*/
+/*    color: white;*/
+/*    border: 1px solid #ddd;*/
+/*}*/
+
+ul.pagination li a:hover {
+    background-color: rgba(252, 189, 30, 0.85);
+}
+
+/*footer.center {*/
+/*    text-align: center;*/
+/*}*/
+

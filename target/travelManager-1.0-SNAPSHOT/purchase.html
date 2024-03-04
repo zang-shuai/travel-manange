@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>purchase</title>
+    <script src="js/formaction.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/date.js"></script>
+</head>
+<link rel="stylesheet" href="styles/purchase.css">
+<body>
+<div id="div1">
+    <button class="button button1"><a href="index.html ">返回主界面</a></button>
+</div>
+<div id="main">
+    <div id="main1">
+
+        <div id="main1_1" style="flex:1;">
+            <div id="divguidergname"></div>
+            <div id="divguidergintroduce"></div>
+
+        </div>
+        <div id="main1_2" style="flex:1;">
+            <div id="divtintroduce"></div>
+
+            <div id="divpstartDate"></div>
+            <div id="divpendDate"></div>
+            <div id="divpprice"></div>
+            <div id="divinsurance"></div>
+            <button id="btn" type="button">点击购买</button>
+        </div>
+    </div>
+    <div id="main2">
+        <!-- 3D Slideshow Section -->
+        <section id="slideshow">
+            <div class="entire-content">
+                <div id="slide" class="content-carrousel">
+<!--                    <figure class="shadow"><img ></figure>-->
+<!--                    <figure class="shadow"><img ></figure>-->
+<!--                    <figure class="shadow"><img ></figure>-->
+<!--                    <figure class="shadow"><img src="https://images.pexels.com/photos/776653/pexels-photo-776653.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/></figure>-->
+<!--                    <figure class="shadow"><img src="https://images.pexels.com/photos/54630/japanese-cherry-trees-flowers-spring-japanese-flowering-cherry-54630.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/></figure>-->
+<!--                    <figure class="shadow"><img src="https://images.pexels.com/photos/131046/pexels-photo-131046.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/></figure>-->
+<!--                    <figure class="shadow"><img src="https://images.pexels.com/photos/302515/pexels-photo-302515.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/></figure>-->
+<!--                    <figure class="shadow"><img src="https://images.pexels.com/photos/301682/pexels-photo-301682.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/></figure>-->
+<!--                    <figure class="shadow"><img src="https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/></figure>-->
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="main3" class="tabs">
+        <input type="radio" name="tabs" id="tabone" checked="checked">
+        <label for="tabone">评价导游</label>
+        <div id="main3_1" class="tab">
+<!--            <h3></h3>-->
+        </div>
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">评价景点</label>
+        <div id="main3_2" class="tab">
+<!--            <h3></h3>-->
+        </div>
+    </div>
+
+    </div>
+</div>
+
+
+<script>
+
+
+    function purchaseOrder() {
+        if (getCookie("user") === null) {
+            alert("请先登录")
+        } else {
+            let select = "&insurance=-1"
+            let inputs = document.getElementsByName("insurance");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) {
+                    select = "&insurance=" + inputs[i].value
+                }
+            }
+
+            const pathname = window.document.location.pathname;
+            const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+            window.location.href = pa + "/buyOneServlet" + window.location.search + "&uid=" + getCookie("uid") + select
+        }
+    }
+
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "purchaseOrderServlet" + window.location.search, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            //获取服务器的响应结果
+            let responseText = xmlhttp.responseText;
+            let plan = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+
+            let tintroduce = plan["tourist"]["tintroduce"];
+
+            let touristtouristImglist = plan["tourist"]["touristImg"];
+
+            let guidergname = plan["guider"]["gname"];
+            let guiderghead = plan["guider"]["ghead"];
+            let guidergintroduce = plan["guider"]["gintroduce"];
+            let pstartDate = new Date(plan["pstartDate"]).format("yyyy-MM-dd")
+            let pendDate = new Date(plan["pendDate"]).format("yyyy-MM-dd")
+            let pprice = plan["pprice"];
+
+            let main1_1 = document.getElementById("main1_1");
+            let main1_2 = document.getElementById("main1_2");
+            let img = document.createElement("img");
+            img.src = guiderghead
+            img.height=400
+            img.width=400
+            main1_1.appendChild(img)
+
+            document.getElementById("divtintroduce").innerHTML = "景点介绍：" + tintroduce
+            document.getElementById("divguidergname").innerHTML = "导游：" + guidergname
+            document.getElementById("divguidergintroduce").innerHTML = "导游介绍：" + guidergintroduce
+            document.getElementById("divpstartDate").innerHTML = "起始时间：" + pstartDate
+            document.getElementById("divpendDate").innerHTML = "结束时间：" + pendDate
+            document.getElementById("divpprice").innerHTML = "价格：" + pprice
+
+            let divinsurance = document.getElementById("divinsurance");
+            //获取所有旅游景点
+            var xmlhttp2 = new XMLHttpRequest();
+            xmlhttp2.open("POST", "findAllInsuranceServlet", true);
+            xmlhttp2.send();
+            xmlhttp2.onreadystatechange = function () {
+                if (xmlhttp2.readyState === 4 && xmlhttp2.status === 200) {
+                    let divinsurance = document.getElementById("divinsurance");
+                    let responseText = xmlhttp2.responseText
+                    let arr = JSON.parse(responseText);
+                    for (let obj in arr) {
+                        let input = document.createElement("input")
+                        let span = document.createElement("span")
+                        input.type = "radio"
+                        input.name = "insurance"
+                        input.required = true
+                        let arrElement = arr[obj]
+                        // console.log(arrElement)
+                        input.value = arrElement["sid"]
+                        span.innerHTML = arrElement["sname"] + ":" + arrElement["sprice"] + "元"
+                        divinsurance.appendChild(input)
+                        divinsurance.appendChild(span)
+                    }
+                }
+            }
+
+            let btn = document.getElementById("btn");
+            btn.onclick = function () {
+                let b = confirm("你确定要购买吗？");
+                if (b) {
+                    purchaseOrder()
+                }
+            }
+            //写入图片-------------------------------------------------------------------------------------------------------------------------------
+            let main2 = document.getElementById("slide");
+            for (let touristimg in touristtouristImglist) {
+                let touristtouristImglistElement = touristtouristImglist[touristimg];
+                let taddress = touristtouristImglistElement["taddress"];
+                let img = document.createElement("img");
+                let figure = document.createElement("figure");
+                figure.class="shadow"
+                // img.width = 430
+                // img.height = 280
+                img.src = taddress
+                figure.appendChild(img)
+                main2.appendChild(figure)
+            }
+            //获取评论
+        }
+    }
+
+    var xmlhttp1 = new XMLHttpRequest();
+    xmlhttp1.open("POST", "getCommentServlet" + window.location.search, true);
+    xmlhttp1.send();
+    xmlhttp1.onreadystatechange = function () {
+        if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
+            let responseText = xmlhttp1.responseText;
+            console.log(responseText)
+            let comment = JSON.parse(responseText);
+            console.log(comment)
+            let main3_1 = document.getElementById("main3_1");
+            let main3_2 = document.getElementById("main3_2");
+            for (let i = 0; i < comment.length; i++) {
+                let ctype = parseInt(comment[i]["ctype"])
+                let content = comment[i]["content"]
+                let uhead = comment[i]["uhead"]
+                let uname = comment[i]["uname"]
+                let pid = comment[i]["pid"]
+                if (ctype === 1) {
+                    let divdiv = document.createElement("div");
+                    let divuhead = document.createElement("img");
+                    let divuname = document.createElement("span");
+                    let divpid = document.createElement("span");
+                    let divcontent = document.createElement("div");
+
+                    divuhead.src = uhead
+                    divuhead.width = 40
+                    divuhead.height = 40
+                    divuname.innerHTML = uname
+                    divcontent.innerHTML = content
+
+                    divdiv.appendChild(divuhead)
+                    divdiv.appendChild(divuname)
+                    divdiv.appendChild(divpid)
+                    divdiv.appendChild(divcontent)
+                    main3_1.appendChild(divdiv)
+                } else {
+                    let divdiv = document.createElement("div");
+                    let divuhead = document.createElement("img");
+                    let divuname = document.createElement("span");
+                    let divpid = document.createElement("span");
+                    let divcontent = document.createElement("div");
+
+                    divuhead.src = uhead
+                    divuhead.width = 40
+                    divuhead.height = 40
+                    divuname.innerHTML = uname
+                    divcontent.innerHTML = content
+
+                    divdiv.appendChild(divuhead)
+                    divdiv.appendChild(divuname)
+                    divdiv.appendChild(divpid)
+                    divdiv.appendChild(divcontent)
+                    main3_2.appendChild(divdiv)
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

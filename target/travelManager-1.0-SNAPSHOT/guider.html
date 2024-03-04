@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>guider</title>
+    <script src="js/formaction.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/date.js"></script>
+</head>
+<link rel="stylesheet" href="styles/userdetail.css">
+<body>
+<div id="div1">
+    <button class="button button1"><a href="index.html ">返回主界面</a></button>
+</div>
+<div id="main">
+    <div id="main1">
+        <div id="main1_1" style="flex:1"></div>
+        <div id="main1_2" style="flex:1">
+            <form>
+                <label for="gname">姓名：</label><input name="gname" type="text" id="gname"/><br>
+                <label for="gage">年龄：</label><input name="gage" type="text" id="gage"/><br>
+                <label for="gtelephonenumber">电话号码：</label><input name="gtelephonenumber" type="text"
+                                                                  id="gtelephonenumber"/><br>
+<!--                <input hidden type="text" id="gpassword"/><br>-->
+                <!--                <button id="btn" type="button">点击修改</button>-->
+            </form>
+        </div>
+    </div>
+    <div id="main2">
+        <table id="ordertable">
+            <tr>
+                <th>计划id</th>
+                <th>最大人数</th>
+                <th>目前人数</th>
+                <th>计划开始时间</th>
+                <th>计划结束时间</th>
+                <th>计划状态</th>
+            </tr>
+        </table>
+        <form method="post" id="commentForm">
+        </form>
+    </div>
+    <div id="main3" class="tabs">
+        <input type="radio" name="tabs" id="tabone" checked="checked">
+        <label for="tabone">评价导游</label>
+        <div id="main3_1" class="tab">
+<!--            <h3></h3>-->
+        </div>
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">评价景点</label>
+        <div id="main3_2" class="tab">
+<!--            <h3></h3>-->
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<script>
+    function getComment(pid) {
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.open("POST", "guiderGetCommentServlet?pid=" + pid, true)
+        xmlhttp.send()
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                let responseText = xmlhttp.responseText
+                let comment = JSON.parse(responseText)
+                for (let i = 0; i < comment.length; i++) {
+                    let content = comment[i]["content"];
+                    if (parseInt(comment[i]["ctype"]) === 1) {
+                        let div = document.createElement("div");
+                        div.innerHTML=content
+                        let main3_1 = document.getElementById("main3_1");
+                        // main3_1.innerHTML="<h3>评价导游</h3>"
+                        main3_1.appendChild(div)
+                    } else {
+                        let div = document.createElement("div");
+                        div.innerHTML=content
+                        let main3_2 = document.getElementById("main3_2");
+                        // main3_2.innerHTML="<h3>评价景点</h3>"
+                        main3_2.appendChild(div)
+                    }
+                }
+            }
+        }
+    }
+
+
+    function getPath() {
+        const pathname = window.document.location.pathname
+        const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1)
+        return pa + ""
+    }
+
+    function getGuider() {
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.open("POST", "getGuiderServlet" + window.location.search, true)
+        xmlhttp.send()
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //获取服务器的响应结果
+                let responseText = xmlhttp.responseText
+                let user = JSON.parse(responseText) //由JSON字符串转换为JSON对象
+                console.log(user)
+                let inputgname = document.getElementById("gname");
+                let inputgage = document.getElementById("gage");
+                let inputgtelephonenumber = document.getElementById("gtelephonenumber");
+
+                let gname = user["gname"];
+                let gage = user["gage"];
+                let gtelephonenumber = user["gtelephonenumber"];
+                let ghead = user["ghead"];
+
+                inputgname.value = gname
+                inputgage.value = gage
+                inputgtelephonenumber.value = gtelephonenumber
+
+                inputgname.disabled = "disabled"
+                inputgage.disabled = "disabled"
+                inputgtelephonenumber.disabled = "disabled"
+
+                let main1_1 = document.getElementById("main1_1");
+                let img = document.createElement("img");
+                // console.log(ghead)
+                img.src = ghead
+                img.width = 400
+                img.height = 400
+                main1_1.appendChild(img)
+
+            }
+        }
+    }
+
+    function getOrders() {
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.open("POST", "getGuiderOrdersServlet" + window.location.search, true)
+        xmlhttp.send()
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //获取服务器的响应结果
+                let responseText = xmlhttp.responseText
+                let orders = JSON.parse(responseText) //由JSON字符串转换为JSON对象
+                console.log(orders)
+                let today = new Date().format("yyyy-MM-dd")
+                for (let i = 0; i < orders.length; i++) {
+                    let pid = orders[i]["pid"]
+                    let pmaxcount = orders[i]["pmaxCount"]
+                    let pcount = orders[i]["pcount"]
+                    let planPstartDate = new Date(orders[i]["pstartDate"]).format("yyyy-MM-dd")
+                    let planPendDate = new Date(orders[i]["pendDate"]).format("yyyy-MM-dd")
+
+                    let look = []
+                    let tr = document.createElement("tr")
+                    look.push(pid)
+                    look.push(pmaxcount)
+                    look.push(pcount)
+                    look.push(planPstartDate)
+                    look.push(planPendDate)
+
+                    for (let x in look) {
+                        let td = document.createElement("td")
+                        td.innerHTML = look[x]
+                        tr.appendChild(td)
+                    }
+
+                    if (today < planPstartDate) {
+
+
+                        let button = document.createElement("span")
+                        button.innerHTML = "旅行还未开始"
+                        let td = document.createElement("td")
+                        td.appendChild(button)
+                        tr.appendChild(td)
+                    } else if (planPendDate < today) {
+                        let button = document.createElement("span")
+                        button.innerHTML = "旅行已经结束"
+                        let td = document.createElement("td")
+
+                        let button1 = document.createElement("button")
+                        button1.innerHTML = "点击查看评论"
+                        button1.onclick = function () {
+                            getComment(pid)
+                            // window.location.href = getPath() + "/refundServlet" + window.location.search + "&pid=" + pid + "&oid=" + oid
+                        }
+
+
+                        td.appendChild(button)
+                        td.appendChild(button1)
+                        tr.appendChild(td)
+                    } else {
+                        let button = document.createElement("span")
+                        button.innerHTML = "旅行中"
+                        let td = document.createElement("td")
+                        td.appendChild(button)
+                        tr.appendChild(td)
+                    }
+                    document.getElementById("ordertable").appendChild(tr)
+                }
+
+            }
+        }
+    }
+
+    getGuider()
+    getOrders()
+
+
+</script>
+</body>
+</html>

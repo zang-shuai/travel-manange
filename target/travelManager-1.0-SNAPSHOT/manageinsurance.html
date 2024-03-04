@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>manageinsurance</title>
+</head>
+<link rel="stylesheet" href="styles/admin.css">
+<body>
+<div class="wrapper">
+
+    <nav>
+
+        <header>
+            <span></span>
+            Admin
+            <a></a>
+        </header>
+
+        <ul>
+            <li><span><a href="admin.html">Navigation</a></span></li>
+            <li><a href="manageusers.html">管理用户</a></li>
+            <li><a href="managetourist.html">管理旅游景点</a></li>
+            <li><a href="manageguider.html">管理导游</a></li>
+            <li><a href="manageplan.html">管理计划</a></li>
+            <li><a class="active" href="manageinsurance.html">管理保险</a></li>
+            <li><span>Other</span></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <main>
+        <h1>旅游信息管理系统</h1>
+        <div class="flex-grid">
+            <button><a href="addInsurance.html">添加保险</a></button>
+
+        </div>
+        <div class="flex-grid">
+            <table id="insurancetable">
+                <tr>
+                    <th>序号</th>
+                    <th>类型</th>
+                    <th>价格</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+</div>
+
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "findAllInsuranceServlet", true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            //获取服务器的响应结果
+            let responseText = xmlhttp.responseText;
+            let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+            for (let obj in arr) {
+                let look = []
+                let tr = document.createElement("tr")
+                let arrElement = arr[obj];
+                look.push(arrElement["sid"])
+                look.push(arrElement["sname"])
+                look.push(arrElement["sprice"])
+                for (let x in look) {
+                    let td = document.createElement("td")
+                    td.innerHTML = look[x]
+                    tr.appendChild(td)
+                }
+                document.getElementById("insurancetable").appendChild(tr);
+            }
+        }
+    }
+</script>
+</body>
+</html>

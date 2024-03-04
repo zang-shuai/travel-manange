@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/formaction.js"></script>
+    <title>guiderlogin</title>
+</head>
+<link rel="stylesheet" href="styles/userlogin.css">
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/user.js"></script>
+<body>
+<div class="login-page" >
+    <div class="form" >
+        <form id="loginform" method="post">
+            电话：<input name="gtelephonenumber" type="text"><br>
+            密码：<input name="gpassword" type="password"><br>
+            <input type="submit">
+        </form>
+    </div>
+</div>
+<footer class="last"></footer>
+<script>
+    setaction("loginform","guiderLoginServlet")
+</script>
+</body>
+</html>

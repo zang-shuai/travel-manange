@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+    <script src="js/formaction.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/date.js"></script>
+</head>
+<link rel="stylesheet" href="styles/userdetail.css">
+<body>
+<div id="div1">
+    <button class="button button1"><a href="index.html ">返回主界面</a></button>
+</div>
+<div id="main">
+    <div id="main1">
+        <div id="main1_1" style="flex:1"></div>
+        <div id="main1_2" style="flex:1">
+            <form>
+                <label for="uname">姓名：</label><input name="uname" type="text" id="uname"/><br>
+                <label for="uage">年龄：</label><input name="uage" type="text" id="uage"/><br>
+                <label for="utelephonenumber">电话号码：</label><input name="utelephonenumber" type="text"
+                                                                  id="utelephonenumber"/><br>
+<!--                <input hidden type="text" id="upassword"/><br>-->
+<!--                <button id="btn" type="button">点击修改</button>-->
+            </form>
+        </div>
+    </div>
+    <div id="main2">
+        <table id="ordertable" >
+            <tr>
+                <th>计划id</th>
+                <th>购买时间</th>
+                <th>保险类型</th>
+                <th>计划开始时间</th>
+                <th>计划结束时间</th>
+                <th>导游姓名</th>
+                <th>操作</th>
+            </tr>
+        </table>
+        <form method="post" id="commentForm">
+        </form>
+    </div>
+    <div id="main3" class="tabs">
+        <input type="radio" name="tabs" id="tabone" checked="checked">
+        <label for="tabone">评价导游</label>
+        <div id="main3_1" class="tab">
+            <!--            <h3></h3>-->
+        </div>
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">评价景点</label>
+        <div id="main3_2" class="tab">
+            <!--            <h3></h3>-->
+        </div>
+    </div>
+
+</div>
+<!--</dicv>-->
+
+<script>
+    function getPath() {
+        const pathname = window.document.location.pathname
+        const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1)
+        return pa + ""
+    }
+
+    function getUser() {
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.open("POST", "getUserServlet" + window.location.search, true)
+        xmlhttp.send()
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //获取服务器的响应结果
+                let responseText = xmlhttp.responseText
+                let user = JSON.parse(responseText) //由JSON字符串转换为JSON对象
+                console.log(user)
+                let inputuname = document.getElementById("uname");
+                let inputuage = document.getElementById("uage");
+                // let uhead = document.getElementById("uhead");
+                let inpututelephonenumber = document.getElementById("utelephonenumber");
+                // let btn = document.getElementById("btn");
+
+                let uname = user["uname"];
+                let uage = user["uage"];
+                let utelephonenumber = user["utelephonenumber"];
+                let uhead = user["uhead"];
+
+                inputuname.value=uname
+                inputuage.value=uage
+                inpututelephonenumber.value=utelephonenumber
+
+                inputuname.disabled="disabled"
+                inputuage.disabled="disabled"
+                inpututelephonenumber.disabled="disabled"
+
+
+                let main1_1 = document.getElementById("main1_1");
+                let img = document.createElement("img");
+                console.log(uhead)
+                img.src=uhead
+                img.width=400
+                img.height=400
+                // img.width=40
+                // img.height=40
+                main1_1.appendChild(img)
+
+            }
+        }
+    }
+
+    function getOrders() {
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.open("POST", "getUserOrdersServlet" + window.location.search, true)
+        xmlhttp.send()
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //获取服务器的响应结果
+                let responseText = xmlhttp.responseText
+                let orders = JSON.parse(responseText) //由JSON字符串转换为JSON对象
+                console.log(orders)
+                /*
+                计划id
+                计划时间
+                计划导游
+                计划地点
+                计划状态：
+                    1. 未开始，可退票
+                    2. 已开始
+                    3. 已结束，可评论
+                 */
+                let today = new Date().format("yyyy-MM-dd")
+                for (let i = 0; i < orders.length; i++) {
+                    let pid = orders[i]["pid"]//旅行id
+                    let oid = orders[i]["oid"]//旅行id
+                    let obuyDate = new Date(orders[i]["obuyDate"]).format("yyyy-MM-dd hh:mm:ss")//购买时间
+                    let insuracnceSname = orders[i]["insurance"]["sname"]
+                    let insuracnceSid = orders[i]["insurance"]["sid"]
+                    let planPstartDate = new Date(orders[i]["plan"]["pstartDate"]).format("yyyy-MM-dd")
+                    let planPendDate = new Date(orders[i]["plan"]["pendDate"]).format("yyyy-MM-dd")
+                    let planGuiderGname = orders[i]["plan"]["guider"]["gname"]
+
+                    let look = []
+                    let tr = document.createElement("tr")
+                    look.push(pid)
+                    look.push(obuyDate)
+                    look.push(insuracnceSname)
+                    look.push(planPstartDate)
+                    look.push(planPendDate)
+                    look.push(planGuiderGname)
+
+                    for (let x in look) {
+                        let td = document.createElement("td")
+                        td.innerHTML = look[x]
+                        tr.appendChild(td)
+                    }
+
+                    if (today < planPstartDate) {
+                        let button = document.createElement("button")
+                        button.innerHTML = "点击退订"
+                        button.onclick = function () {
+                            window.location.href = getPath() + "/refundServlet" + window.location.search + "&pid=" + pid + "&oid=" + oid
+                        }
+                        let td = document.createElement("td")
+                        td.appendChild(button)
+                        tr.appendChild(td)
+                    } else if (planPendDate < today) {
+                        let button = document.createElement("button")
+                        button.innerHTML = "点击评论"
+                        button.onclick = function () {
+
+                            let inputElement = document.createElement("input");
+                            inputElement.type = "radio"
+                            inputElement.name = "ctype"
+                            inputElement.required=true
+                            inputElement.value = "1"
+
+                            let span1 = document.createElement("span");
+                            span1.innerHTML = "评价导游"
+
+                            let inputElement2 = document.createElement("input");
+                            inputElement2.type = "radio"
+                            inputElement2.name = "ctype"
+                            inputElement2.value = "2"
+                            inputElement2.required=true
+
+                            let span2 = document.createElement("span");
+                            span2.innerHTML = "评价旅游景点"
+
+
+                            let textAreaElement = document.createElement("textarea")
+                            textAreaElement.rows = 10
+                            textAreaElement.cols = 30
+                            textAreaElement.required = true
+                            textAreaElement.name = "comment"
+                            textAreaElement.id = "comment"
+
+
+                            let submitElement = document.createElement("input")
+                            submitElement.type = "submit"
+                            submitElement.value = "提交"
+
+
+                            let commentForm = document.getElementById("commentForm")
+
+                            commentForm.innerHTML=""
+                            commentForm.appendChild(inputElement)
+                            commentForm.appendChild(span1)
+                            commentForm.appendChild(inputElement2)
+                            commentForm.appendChild(span2)
+                            commentForm.appendChild(textAreaElement)
+                            commentForm.appendChild(submitElement)
+                           setaction("commentForm", "/commendServlet" + window.location.search + "&pid=" + pid + "&oid=" + oid )
+                        }
+                        let td = document.createElement("td")
+                        td.appendChild(button)
+                        tr.appendChild(td)
+                    } else {
+                    }
+                    document.getElementById("ordertable").appendChild(tr)
+                }
+
+            }
+        }
+    }
+
+    getUser()
+    getOrders()
+
+
+</script>
+</body>
+</html>

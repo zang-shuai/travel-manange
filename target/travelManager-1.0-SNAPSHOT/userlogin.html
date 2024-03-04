@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/formaction.js"></script>
+    <title>userlogin</title>
+</head>
+<link rel="stylesheet" href="styles/userlogin.css">
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/user.js"></script>
+<body>
+<div class="login-page" >
+    <div class="form" >
+        <form class="login-form" id="loginform" method="post" >
+            电话：<input name="utelephonenumber" type="text"  placeholder="电话号码" required>
+            密码：<input name="upassword" type="password" minlength="6" maxlength="32" placeholder="密码" required/>
+            <input type="submit">
+
+            <p>还未注册？  <a href="userregister.html">前往注册</a></p>
+        </form>
+    </div>
+</div>
+<footer class="last"></footer>
+<script >
+    setaction("loginform","userLoginServlet")
+
+</script>
+</body>
+</html>

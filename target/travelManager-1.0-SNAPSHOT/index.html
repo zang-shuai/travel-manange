@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/cookie.js"></script>
+    <script src="js/date.js"></script>
+    <title>index</title>
+</head>
+<link rel="stylesheet" href="styles/index.css">
+<body>
+<div class="wrapper">
+    <a id="namelink"><h1 id="name"></h1></a>
+
+    <header id="head" class="flex-grid">
+<!--        <a id="namelink"><h1 id="name"></h1></a>-->
+        <h2><a href="index.html"><i class="ion-plane"></i> Shuaier-Travel</a></h2>
+        <nav>
+            <ul>
+                <li>
+                    <a href="userregister.html">用户注册</a>
+                </li>
+                <li>
+                    <a id="register" href="userlogin.html">用户登录</a>
+                </li>
+                <li>
+                    <a id="guider" href="guiderlogin.html">导游登录</a>
+                </li>
+                <li>
+                    <a href="adminlogin.html">进入管理</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="flex-grid">
+        <button id="noregister" onclick="clearCookie('user');clearCookie('uid')">用户登出</button>
+    </div>
+    <main>
+    <div id="plans" class="flex-grid"></div>
+    </main>
+</div>
+
+
+
+<script>
+
+    const pathname = window.document.location.pathname;
+    const pa = pathname.substring(0, pathname.substr(1).indexOf('/') + 1);
+
+    let date = new Date().format("yyyy-MM-dd");
+
+    if (getCookie("user") === null) {
+        document.getElementById("register").style.display = "inline";
+        document.getElementById("noregister").style.display = "none";
+    } else {
+        document.getElementById("namelink").href = "userdetails.html" + "?uid=" + getCookie("uid");
+        document.getElementById("register").style.display = "none";
+        document.getElementById("noregister").style.display = "inline";
+        //登录显示：
+        document.getElementById("name").innerText = getCookie("user");
+        fun1();
+    }
+
+    function fun1() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "getHeadServlet", true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //获取服务器的响应结果
+                let responseText = xmlhttp.responseText;
+                let obj = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+                console.log(obj)
+                let uhead = obj.uhead;
+                document.getElementById("head").innerHTML = "<img height='50px' width='50px' src=" + uhead + ">"
+            }
+        }
+    }
+
+    getAllPlans()
+
+
+    function getAllPlans() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "findAllPlanServlet", true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //获取服务器的响应结果
+                let responseText = xmlhttp.responseText;
+                let arr = JSON.parse(responseText); //由JSON字符串转换为JSON对象
+                for (let obj in arr) {
+                    let look = []
+                    let tr = document.createElement("div")
+                    let arrElement = arr[obj]
+                    let pstartDate = new Date(arrElement["pstartDate"]).format("yyyy-MM-dd")
+                    let pendDate = new Date(arrElement["pendDate"]).format("yyyy-MM-dd")
+                    if (date < pstartDate) {
+                    } else {
+                        continue
+                    }
+                    look.push("景点: "+arrElement["tname"])
+                    look.push("导游: "+arrElement["gname"])
+                    look.push("开始时间: "+pstartDate)
+                    look.push("结束时间: "+pendDate)
+                    look.push("价格: "+arrElement["pprice"])
+                    for (let x in look) {
+                        let td = document.createElement("div")
+                        td.innerHTML = look[x]
+                        tr.appendChild(td)
+                    }
+
+                    let a = document.createElement("a");
+                    a.href = pa + "/purchase.html" + "?" + "pid=" + arrElement["pid"]
+                    a.innerHTML = "查看详情"
+                    let img = document.createElement("img");
+                    img.src = arrElement["tourist"]["touristImg"][0]["taddress"]
+                    // img.width="100%"
+                    // img.height="100%"
+                    // img.style="float:left"
+                    let nb = document.createElement("div")
+                    let sb = document.getElementById("plans")
+                    nb.appendChild(img);
+                    // tr.style="float:none"
+                    nb.appendChild(tr);
+                    nb.appendChild(a);
+                    nb.appendChild(document.createElement("hr"))
+                    sb.appendChild(nb);
+                }
+            }
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

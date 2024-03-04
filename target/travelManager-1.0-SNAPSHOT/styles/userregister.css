@@ -1,0 +1,245 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    padding-top: 25px;
+    background: url("images/register.png") no-repeat center;
+
+}
+.lg_layout{
+    width: 1150px;
+    height: 500px;
+    margin: auto;
+    border: 8px solid rgba(252, 189, 30, 0.85);
+    background-color: rgba(214, 221, 224, 0.4);
+
+}
+
+label{
+    color: black;
+    font-size: 18px;
+}
+
+.lg_left{
+    /*border: 1px solid red;*/
+    float: left;
+    margin: 15px;
+}
+.lg_left > p:first-child{
+    font-size: 20px;
+    color: rgba(252, 189, 30, 0.85);
+}
+
+.lg_left > p:last-child{
+    color:black;
+    font-size: 20px;
+
+}
+
+.lg_center{
+    float: left;
+    margin-top: 20px;
+    padding-left: 200px;
+
+}
+
+.lg_right{
+    float: right;
+    margin: 15px;
+}
+
+.lg_right > p:first-child{
+    color:black;
+    font-size: 20px;
+
+}
+.lg_right p a {
+    color:rgba(252, 189, 30, 0.85);
+    font-size: 20px;
+}
+
+.td_left{
+    width: 80px;
+    text-align: right;
+    height: 60px;
+}
+.td_right{
+    padding-left: 50px ;
+    color:rgba(252, 189, 30, 0.85);
+}
+
+#username,#email,#name,#tel,#birthday,#file,#password{
+    width: 200px;
+    height: 32px;
+    border: 3px solid rgba(252, 189, 30, 0.85);
+    border-radius: 10px;
+    padding-left: 10px;
+    /*border-image-source: url(../images/who.jpg);*/
+    border-image-slice: 20;
+    border-image-repeat:round;
+    border-image-width: 8px;
+    color: black;
+}
+
+#sub{
+    width: 150px;
+    height: 40px;
+    background-color: rgba(252, 189, 30, 0.85);
+    border: 1px solid rgba(252, 189, 30, 0.85);
+    border-radius: 5px;
+    colspan:2;
+    align:center;
+}
+
+.lg_link {
+    text-align: center;
+    padding-top: 20px;
+}
+.links {
+    margin-bottom: 15px;
+}
+/*.links a {*/
+/*    text-decoration: none;*/
+/*    margin: 0 3px;}*/
+/*a:link {color:#000000;}      !* 未访问链接*!*/
+/*a:visited {color:#00FF00;}  !* 已访问链接 *!*/
+/*a:hover {color:#FF00FF;}  !* 鼠标移动到链接上 *!*/
+/*a:active {color:#0000FF;}  !* 鼠标点击时 *!*/
+
+.error{
+    color:red;
+}
+#td_sub{
+    padding-left: 150px;
+}
+
+.done {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 0px auto;
+    box-shadow: inset 0px 0px 0px #7ac142;
+    animation: fill-green 0.5s ease-in-out 0.5s forwards, scale 0.3s ease-in-out 0.7s both;
+}
+.done .circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #7ac142;
+    fill: none;
+    animation-name: stroke;
+    animation-duration: .6s ;
+    animation-timing-function:cubic-bezier(0.65, 0, 0.45, 1);
+    animation-fill-mode:forwards;
+}
+.done .check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.7s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+.wrong {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 0px auto;
+    box-shadow: inset 0px 0px 0px #e74c3c;
+    animation: fill-red 0.5s ease-in-out 0.5s forwards, scale 0.3s ease-in-out 0.7s both;
+}
+.wrong .circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #e74c3c;
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.wrong .line {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.7s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+.wrong .line:nth-child(1) {
+    animation-delay: 1s;
+}
+.wrong .line:nth-child(2) {
+    /* Animate */
+
+    animation-delay: 0.7s;
+}
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.2, 1.2, 1);
+    }
+    80% {
+        transform: scale3d(0.8, 0.8, 1);
+    }
+}
+@keyframes fill-green {
+    100% {
+        box-shadow: inset 0px 0px 0px 25px #7ac142;
+    }
+}
+@keyframes fill-red {
+    100% {
+        box-shadow: inset 0px 0px 0px 25px #e74c3c;
+    }
+}
+
+.last{
+    position: relative;
+    margin: 0 auto 50px;
+    text-align: left;
+    border-radius: 7px;
+    max-width: 270px;
+}
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    background-color: #f1f1f1;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    float: left;
+    padding: 16px;
+    text-decoration: none;
+    transition: background-color .8s;
+    border: 1px solid #ddd;
+}
+
+/*ul.pagination li a.active {*/
+/*    background-color: rgba(252, 189, 30, 0.85);*/
+/*    color: white;*/
+/*    border: 1px solid #ddd;*/
+/*}*/
+
+ul.pagination li a:hover {
+    background-color: rgba(252, 189, 30, 0.85);
+}
+
+
